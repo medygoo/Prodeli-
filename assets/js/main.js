@@ -3,6 +3,15 @@ import { normalizeLanguage, translations } from './i18n.js';
 
 const STORAGE_KEY = 'prodeli-language';
 
+function fixProdeliLogoFraming() {
+  document.querySelectorAll('.brand img, .hero-card img').forEach((logo) => {
+    logo.style.objectFit = 'contain';
+    logo.style.objectPosition = 'center';
+    logo.style.background = '#ffffff';
+    logo.style.padding = '4px';
+  });
+}
+
 function ensureSchoolSafeLink() {
   const projectCopy = document.querySelector('.project-copy');
   if (!projectCopy || projectCopy.querySelector('[data-schoolsafe-link]')) return;
@@ -83,6 +92,7 @@ function initYear() {
   if (node) node.textContent = String(new Date().getFullYear());
 }
 
+fixProdeliLogoFraming();
 ensureSchoolSafeLink();
 initLanguage();
 initNavigation();
