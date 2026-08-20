@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prodeli-sarlu.cc.cd/sitemap.xml
