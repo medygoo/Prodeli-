@@ -38,6 +38,19 @@ test('le siège social publié est celui de l’article 3', () => {
   assert.ok(translations.en['legal.seat'].includes('Ngungu'));
 });
 
+test('le bureau ne se confond jamais avec le siège social', () => {
+  /* Deux adresses distinctes : celle qui fait foi (article 3) et celle où la
+     société reçoit. Les confondre dans des mentions légales est une faute. */
+  assert.ok(html.includes('Avenue Kambabare n°4367'), 'adresse du bureau absente');
+  for (const langue of ['fr', 'en']) {
+    const t = translations[langue];
+    assert.ok(t['legal.office'].includes('Kambabare'), `${langue} : bureau absent`);
+    assert.ok(t['legal.seat'].includes('Ngungu'), `${langue} : siège absent`);
+    assert.notEqual(t['legal.office'], t['legal.seat'], `${langue} : les deux adresses sont identiques`);
+    assert.ok(t['legal.seatNote'].length > 40, `${langue} : la distinction n'est pas expliquée`);
+  }
+});
+
 test('la gérance, le capital, le RCCM et l’ID national sont présents', () => {
   for (const valeur of [STATUTS.gerant, STATUTS.rccm, STATUTS.idnat]) {
     assert.ok(html.includes(valeur), `absent de la page : ${valeur}`);
