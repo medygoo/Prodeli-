@@ -18,7 +18,7 @@ const html404 = lire('404.html');
 const STATUTS = {
   denomination: 'PROGENITURE DENIS LOMEA IFANGWA SARLU', // article 2
   sigle: 'PRO.DE.L.I SARLU',                             // article 2
-  siege: 'Avenue Ngungu n°108, Quartier Pende, Commune de Kinshasa', // article 3
+  siege: 'Avenue Kambabare n°4367, Quartier Ndolo, Commune de Barumbu', // adresse fixee par Loms
   gerant: 'LOMELA IFANGWA Medy',                         // article 14
   capital: '1 500 USD',                                  // article 6
   rccm: 'CD/KNM/RCCM/26-B-00585',
@@ -32,22 +32,16 @@ test('la dénomination de l’article 2 est publiée telle quelle', () => {
   assert.ok(html.includes(STATUTS.sigle), 'sigle absent');
 });
 
-test('le siège social publié est celui de l’article 3', () => {
-  assert.ok(html.includes('Avenue Ngungu n°108'), 'le siège social ne correspond pas aux statuts');
-  assert.ok(translations.fr['legal.seat'].includes('Ngungu'));
-  assert.ok(translations.en['legal.seat'].includes('Ngungu'));
-});
 
-test('le bureau ne se confond jamais avec le siège social', () => {
-  /* Deux adresses distinctes : celle qui fait foi (article 3) et celle où la
-     société reçoit. Les confondre dans des mentions légales est une faute. */
-  assert.ok(html.includes('Avenue Kambabare n°4367'), 'adresse du bureau absente');
+
+test('l’adresse publiée est celle fixée par Loms, et il n’y en a qu’une', () => {
+  /* Une seule adresse : Avenue Kambabare n°4367, Quartier Ndolo, Barumbu.
+     Décision de Loms, confirmée trois fois. */
+  assert.ok(html.includes('Avenue Kambabare n°4367'), 'adresse absente');
+  assert.ok(!html.includes('Ngungu'), 'une seconde adresse a reparu');
   for (const langue of ['fr', 'en']) {
-    const t = translations[langue];
-    assert.ok(t['legal.office'].includes('Kambabare'), `${langue} : bureau absent`);
-    assert.ok(t['legal.seat'].includes('Ngungu'), `${langue} : siège absent`);
-    assert.notEqual(t['legal.office'], t['legal.seat'], `${langue} : les deux adresses sont identiques`);
-    assert.ok(t['legal.seatNote'].length > 40, `${langue} : la distinction n'est pas expliquée`);
+    assert.ok(/Kambabare/.test(translations[langue]['legal.seat']), `${langue} : adresse absente des mentions légales`);
+    assert.ok(/Kambabare/.test(translations[langue]['contact.address']), `${langue} : adresse absente du contact`);
   }
 });
 
@@ -101,7 +95,7 @@ test('le mailto n’envoie pas des « + » à la place des espaces', () => {
 });
 
 test('la page 404 tient depuis n’importe quelle profondeur d’URL', () => {
-  for (const attribut of ['href="/assets/css/styles.css"', 'src="/assets/img/seal.svg"']) {
+  for (const attribut of ['href="/assets/css/styles.css"', 'src="/assets/img/cachet-prodeli.svg"']) {
     assert.ok(html404.includes(attribut), `chemin relatif dans 404.html : ${attribut}`);
   }
   assert.ok(!/(?:href|src)="assets\//.test(html404), 'chemin relatif restant dans 404.html');
@@ -152,7 +146,7 @@ test('l’histoire du fondateur porte son portrait et ses dates', () => {
 
 test('chaque entité porte son propre emblème', () => {
   assert.ok(html.includes('/assets/img/fondation-mark.svg'), 'emblème de la Fondation absent');
-  assert.ok(html.includes('/assets/img/mark.svg'), 'emblème de la société absent');
+  assert.ok(html.includes('/assets/img/embleme-prodeli.svg'), 'emblème de la société absent');
   /* Les deux emblèmes sont décoratifs : le nom est déjà le titre de la carte.
      Un alt vide est donc correct, un alt qui répète le titre serait du bruit
      pour un lecteur d'écran. */
@@ -177,4 +171,17 @@ test('les cinq personnes de la lignée sont nommées, chacune avec sa citation',
       }
     }
   }
+});
+
+test('les marques sont vectorielles, donc nettes à toute taille', () => {
+  /* Un logo en JPG se pixellise dès qu'on l'agrandit — sur une bannière,
+     un document imprimé, un écran dense. Les deux marques sont vectorielles. */
+  for (const f of ['embleme-prodeli.svg', 'cachet-prodeli.svg']) {
+    const svg = readFileSync(join(racine, 'assets/img', f), 'utf8');
+    assert.ok(svg.startsWith('<svg'), `${f} n'est pas un SVG`);
+    assert.ok(/viewBox="0 0 \d+ \d+"/.test(svg), `${f} n'a pas de viewBox : il ne se redimensionnera pas`);
+    assert.ok(/fill="#[0-9a-f]{6}"/i.test(svg), `${f} n'a aucune couleur`);
+  }
+  assert.ok(!/\.jpg"/.test(html.replace(/denis-lomela-ifangwa\.jpg/g, '')),
+    'une marque en JPG subsiste dans la page');
 });

@@ -34,7 +34,7 @@ button,input,textarea{font:inherit;color:inherit}
 .site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);border-bottom:1px solid var(--filet);backdrop-filter:blur(14px)}
 .header-inner{min-height:78px;display:flex;align-items:center;gap:1rem}
 .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;margin-right:auto}
-.brand svg{width:52px;height:52px;flex:none}
+.brand img{height:46px;width:auto;flex:none;border-radius:4px}
 .brand-copy strong{display:block;font-size:1.05rem;font-weight:800;letter-spacing:-.02em;line-height:1.1}
 .brand-copy small{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gris);font-weight:600}
 .primary-nav{display:flex;gap:.25rem}
@@ -70,7 +70,7 @@ h3{font-size:1.05rem;line-height:1.35;font-weight:700}
 .hero{padding:4.5rem 0 4rem;background:linear-gradient(180deg,var(--creme),#fff)}
 .hero-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:3.5rem;align-items:center}
 .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
-.hero-seal{justify-self:center;width:min(300px,100%)}
+.hero-seal{justify-self:center;width:min(300px,100%);border-radius:50%}
 .hero-quote{border-left:3px solid var(--vert);padding:.2rem 0 .2rem 1.2rem;margin:1.8rem 0 0;font-size:1.02rem;color:var(--encre);font-style:normal}
 .hero-quote cite{display:block;margin-top:.6rem;font-size:.78rem;font-style:normal;color:var(--gris);letter-spacing:.04em;text-transform:uppercase;font-weight:600}
 
@@ -164,32 +164,6 @@ h3{font-size:1.05rem;line-height:1.35;font-weight:700}
 .lignee h3{font-size:1.25rem;margin:0}
 .lignee-detail{border-top:1px solid var(--filet);padding-top:.9rem;margin-top:.4rem!important;font-size:.88rem!important}
 
-/* ── le fondateur ── */
-.mem{display:grid;grid-template-columns:210px 1fr;gap:2.2rem;align-items:center;background:#fff;border:1px solid var(--filet);border-radius:var(--r);padding:1.8rem 2rem;margin-bottom:2.5rem}
-.mem-photo{width:210px;height:auto;border-radius:var(--r-s);border:1px solid var(--filet);filter:saturate(.9)}
-.mem-role{margin:0 0 .35rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--rouge-fonce)}
-.mem-name{font-size:clamp(1.3rem,2.6vw,1.75rem);margin:0}
-.mem-dates{margin:.35rem 0 1rem;font-size:.92rem;color:var(--gris);font-variant-numeric:tabular-nums;padding-bottom:1rem;border-bottom:1px solid var(--filet)}
-.mem-copy > p:last-child{margin:0;color:var(--gris);font-size:.95rem;max-width:62ch}
-.chaine{list-style:none;margin:0 auto 2.5rem;padding:0;display:grid;gap:0;counter-reset:etape}
-.chaine li{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;padding:1.4rem 0;border-top:1px solid var(--filet)}
-.chaine li:first-child{border-top:0;padding-top:0}
-.chaine-num{width:34px;height:34px;flex:none;border-radius:50%;background:var(--vert);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem}
-.chaine h3{margin:0 0 .4rem;font-size:1.05rem}
-.chaine p{margin:0;color:var(--gris);font-size:.95rem;max-width:78ch}
-@media(max-width:760px){
-  .mem{grid-template-columns:1fr;gap:1.4rem;padding:1.4rem;text-align:left}
-  .mem-photo{width:160px}
-}
-
-/* ── ancres et en-tête collant ──
-   Sans cette marge, un lien du menu amène la section SOUS l'en-tête.
-   Mesuré : #mentions arrivait à 56 px pour un en-tête de 79 px, et les
-   autres ne passaient qu'à un pixel près — par chance, pas par dessin.
-   Sous 1000 px l'en-tête n'est plus collant : la marge redevient inutile. */
-section[id]{scroll-margin-top:96px}
-@media(max-width:1000px){section[id]{scroll-margin-top:1rem}}
-.lignee-logo{width:56px;height:56px;margin-bottom:.3rem}
 
 /* ── la lignée ── */
 .lig-intro{font-size:1.05rem;color:var(--gris);max-width:60ch;margin:0 0 2rem}
@@ -209,3 +183,79 @@ section[id]{scroll-margin-top:96px}
 .lig-echo b{color:var(--vert-fonce);font-weight:700}
 .lig-photo{width:78px;height:104px;object-fit:cover;object-position:center 18%;border-radius:var(--r-s);border:1px solid var(--filet);flex:none;filter:saturate(.9)}
 @media(max-width:640px){.lig-photo{width:62px;height:82px}.lig blockquote{font-size:.95rem}}
+
+/* ══════════════════════════════════════════════════════════════
+   ANCRES — l'en-tête est collant : sans cette marge, cliquer
+   « Contact » fait passer le titre DERRIÈRE la barre.
+   ══════════════════════════════════════════════════════════════ */
+section[id],[id="main"]{scroll-margin-top:96px}
+@media(max-width:1000px){section[id]{scroll-margin-top:84px}}
+
+/* ══════════════════════════════════════════════════════════════
+   MOUVEMENT
+   Règle qui tient tout : le CSS ne cache RIEN par défaut.
+   C'est le script qui pose .anim sur <html>, et seulement s'il
+   tourne et si le visiteur ne demande pas moins d'animation.
+   Sans JavaScript, la page reste entièrement lisible.
+   ══════════════════════════════════════════════════════════════ */
+.anim .rv{opacity:0;transform:translateY(16px)}
+.anim .rv.vu{opacity:1;transform:none;
+  transition:opacity .55s ease-out,transform .55s cubic-bezier(.22,.61,.36,1);
+  transition-delay:var(--d,0ms)}
+
+/* l'en-tête ne se décolle qu'une fois qu'on a quitté le haut */
+.site-header{transition:box-shadow .25s ease,border-color .25s ease}
+.anim .site-header.detache{box-shadow:0 6px 24px rgba(16,24,19,.08);border-bottom-color:transparent}
+
+/* le cachet arrive doucement — une seule fois, au chargement */
+.anim .hero-seal{opacity:0;transform:scale(.96);animation:sceau .9s .15s cubic-bezier(.22,.61,.36,1) forwards}
+@keyframes sceau{to{opacity:1;transform:none}}
+
+/* LE GESTE QUI VEUT DIRE QUELQUE CHOSE : le trait de la lignée se
+   trace de haut en bas, et chaque personne s'allume à son tour —
+   la transmission, littéralement. */
+.anim .lignee-liste::before{transform:scaleY(0);transform-origin:top}
+.anim .lignee-liste.vu::before{transform:scaleY(1);transition:transform 1.4s cubic-bezier(.4,0,.2,1)}
+.anim .lig-pt{transform:scale(0)}
+.anim .lignee-liste.vu .lig-pt{transform:scale(1);
+  transition:transform .45s cubic-bezier(.34,1.56,.64,1);transition-delay:calc(var(--i,0) * 260ms + 200ms)}
+
+/* menu du téléphone : il glisse au lieu d'apparaître d'un bloc */
+.primary-nav{transition:opacity .2s ease,transform .2s ease}
+@media(max-width:1000px){
+  .anim .primary-nav{display:flex;opacity:0;transform:translateY(-8px);pointer-events:none;visibility:hidden}
+  .anim .primary-nav.is-open{opacity:1;transform:none;pointer-events:auto;visibility:visible}
+}
+
+/* micro-réactions : ce qui se touche répond */
+.button{transition:background .18s ease,border-color .18s ease,transform .12s ease,color .18s ease}
+.button:active{transform:translateY(1px)}
+.primary-nav a{position:relative;transition:color .18s ease,background .18s ease}
+.card,.lig-photo{transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease}
+.anim .grid .card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(16,24,19,.07)}
+.language-switch button{transition:background .18s ease,color .18s ease}
+
+/* Le contrat, en une règle : qui demande moins de mouvement n'en a aucun. */
+@media (prefers-reduced-motion:reduce){
+  .anim .rv,.anim .hero-seal,.anim .lig-pt{opacity:1!important;transform:none!important;animation:none!important}
+  .anim .lignee-liste::before{transform:scaleY(1)!important}
+  .anim .grid .card:hover{transform:none}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EN-TÊTE SUR TÉLÉPHONE — le budget se calcule, il ne s'estime pas.
+   Mesuré à 390 px : 350 px utiles pour 406 px réclamés si le nom ne
+   se casse pas. Il se cassait donc en trois lignes pour entrer.
+   On reprend 80 px : emblème 42 px, écarts à 10 px, et la ligne
+   « PRO.DE.L.I SARLU » sort de la barre — elle est déjà dans le
+   pied de page et dans les mentions légales.
+   ══════════════════════════════════════════════════════════════ */
+@media(max-width:430px){
+  .header-inner{gap:.62rem;min-height:66px}
+  .brand img{height:38px;width:auto}
+  .brand-copy small{display:none}
+  .brand-copy strong{font-size:1rem;white-space:nowrap}
+  .menu-button{padding:.55rem .75rem}
+  .language-switch{margin-left:0}
+  .primary-nav{top:66px}
+}

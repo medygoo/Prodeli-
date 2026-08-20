@@ -88,7 +88,79 @@ function initYear() {
   if (node) node.textContent = String(new Date().getFullYear());
 }
 
+
+/* ══════════════════════════════════════════════════════════════
+   MOUVEMENT
+   Le CSS ne cache rien tout seul : la classe .anim est posée ICI,
+   et seulement si le navigateur sait observer le défilement. Si ce
+   script ne tourne pas, la page reste entièrement visible — une
+   animation ratée ne doit jamais effacer le contenu.
+   ══════════════════════════════════════════════════════════════ */
+function initMouvement() {
+  if (!('IntersectionObserver' in window)) return;
+
+  const racine = document.documentElement;
+  racine.classList.add('anim');
+
+  /* Ce qui se révèle au défilement. Les groupes sont décalés entre eux
+     pour que l'œil suive un ordre, pas une apparition en bloc. */
+  const groupes = [
+    '.hero-grid > div > *', '.section-heading > *', '.proverbe',
+    '.grid > .card', '.principe', '.objet-card', '.lignee-liste > .lig',
+    '.projet > div > *', '.contact-grid > div > *', '.contact-form', '.legal-grid > div'
+  ];
+  groupes.forEach((selecteur) => {
+    document.querySelectorAll(selecteur).forEach((noeud, rang) => {
+      noeud.classList.add('rv');
+      noeud.style.setProperty('--d', `${Math.min(rang, 6) * 70}ms`);
+    });
+  });
+
+  const veilleur = new IntersectionObserver((entrees) => {
+    entrees.forEach((entree) => {
+      if (!entree.isIntersecting) return;
+      entree.target.classList.add('vu');
+      veilleur.unobserve(entree.target);   /* une fois révélé, on n'observe plus */
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+  document.querySelectorAll('.rv').forEach((noeud) => veilleur.observe(noeud));
+
+  /* La lignée : le trait se trace, puis chaque personne s'allume à son tour. */
+  const lignee = document.querySelector('.lignee-liste');
+  if (lignee) {
+    lignee.querySelectorAll('.lig-pt').forEach((point, rang) => {
+      point.style.setProperty('--i', String(rang));
+    });
+    const veilleurLignee = new IntersectionObserver((entrees) => {
+      entrees.forEach((entree) => {
+        if (!entree.isIntersecting) return;
+        entree.target.classList.add('vu');
+        veilleurLignee.unobserve(entree.target);
+      });
+    }, { threshold: 0.12 });
+    veilleurLignee.observe(lignee);
+  }
+
+  /* L'en-tête se décolle du haut : une ombre apparaît quand on a défilé. */
+  const entete = document.querySelector('.site-header');
+  if (entete) {
+    let enCours = false;
+    const majEntete = () => {
+      entete.classList.toggle('detache', window.scrollY > 12);
+      enCours = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (enCours) return;
+      enCours = true;
+      window.requestAnimationFrame(majEntete);
+    }, { passive: true });
+    majEntete();
+  }
+}
+
 initLanguage();
 initNavigation();
+initMouvement();
 initYear();
 initContactForm(document.querySelector('#contact-form'));

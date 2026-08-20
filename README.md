@@ -15,7 +15,7 @@ durée, exercice — **n'est pas rédigé librement : il est repris des statuts*
 | ce qui est publié | article des statuts |
 |---|---|
 | dénomination et sigle | article 2 |
-| siège social | article 3 |
+| siège social | fixé par Loms (voir ci-dessous) |
 | objet social (6 domaines) | article 4 |
 | durée — 99 ans | article 5 |
 | capital — 1 500 USD, 100 parts de 15 USD | articles 6 et 7 |
@@ -27,15 +27,22 @@ Le préambule des statuts fournit la conviction affichée en page d'accueil et l
 deux listes « ce que la société rejette / promeut ». **Rien n'a été inventé** :
 ni date de création, ni effectif, ni client, ni chiffre.
 
-### Deux écarts constatés, non corrigés
+### L'adresse
 
-1. **`LOMEA` / `LOMELA`.** L'article 2 fixe la dénomination à « PROGENITURE
-   DENIS **LOMEA** IFANGWA SARLU ». Partout ailleurs dans les statuts — et sur
-   le cachet officiel — le nom est **LOMELA**. Le site publie l'article 2 tel
-   quel, car c'est lui qui fait foi. L'écart appartient à l'acte constitutif,
-   pas au site.
-2. **Le cachet et l'article 2** ne portent donc pas la même orthographe. À
-   arbitrer avec le greffe, pas ici.
+L'adresse publiée est **Avenue Kambabare n°4367, Quartier Ndolo, Commune de
+Barumbu, Kinshasa** — fixée par Loms, propriétaire et décideur. Elle figure une
+seule fois, au contact et aux mentions légales, et un test la garde.
+
+L'article 3 des statuts d'avril 2026 porte une autre adresse. Signalé, tranché
+par Loms, refermé. **Ne pas rouvrir la question.**
+
+### Le nom : LOMEA / LOMELA
+
+L'article 2 fixe la dénomination à « PROGENITURE DENIS **LOMEA** IFANGWA
+SARLU ». Partout ailleurs dans les statuts, sur le cachet, et dans la signature
+du père, le nom est **LOMELA**. Le site publie l'article 2 tel quel, car c'est
+lui qui fait foi. L'écart appartient à l'acte, pas au site.
+
 
 ## La filiation — deux entités, une lignée
 
