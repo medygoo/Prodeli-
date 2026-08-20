@@ -45,11 +45,38 @@ test('l’adresse publiée est celle fixée par Loms, et il n’y en a qu’une'
   }
 });
 
-test('la gérance, le capital, le RCCM et l’ID national sont présents', () => {
+test('le gérant, le RCCM et l’ID national sont présents', () => {
   for (const valeur of [STATUTS.gerant, STATUTS.rccm, STATUTS.idnat]) {
     assert.ok(html.includes(valeur), `absent de la page : ${valeur}`);
   }
-  assert.ok(translations.fr['legal.capital'].includes(STATUTS.capital));
+});
+
+test('la page ne dévoile RIEN de ce qui ne la regarde pas', () => {
+  /* Décision de Loms : le bas de page en disait trop. Le capital surtout —
+     un partenaire en tire une conclusion sur la taille de la société avant
+     d'avoir lu ce qu'elle fait, et aucune loi n'oblige à le publier.
+     Ce test garde le retrait : il échoue si l'un d'eux revient. */
+  const interdits = [
+    ['1 500 USD', 'le capital social'],
+    ['1,500', 'le capital social'],
+    ['100 parts', 'la répartition des parts'],
+    ['associé unique', 'la structure de propriété'],
+    ['sole shareholder', 'la structure de propriété'],
+    ['sans base de données', 'le détail technique du site'],
+    ['no database', 'le détail technique du site'],
+    ['99 ans', 'la durée statutaire'],
+    ['Baobab', 'la banque'],
+    ['2111', 'le compte bancaire']
+  ];
+  for (const [motif, quoi] of interdits) {
+    assert.ok(!html.includes(motif), `${quoi} est publié : « ${motif} »`);
+  }
+  for (const langue of ['fr', 'en']) {
+    const tout = Object.values(translations[langue]).join(' ');
+    for (const [motif, quoi] of interdits) {
+      assert.ok(!tout.includes(motif), `${langue} : ${quoi} est dans le catalogue : « ${motif} »`);
+    }
+  }
 });
 
 test('les coordonnées publiques sont exactes et internationales', () => {
