@@ -3,6 +3,21 @@ import { normalizeLanguage, translations } from './i18n.js';
 
 const STORAGE_KEY = 'prodeli-language';
 
+function ensureSchoolSafeLink() {
+  const projectCopy = document.querySelector('.project-copy');
+  if (!projectCopy || projectCopy.querySelector('[data-schoolsafe-link]')) return;
+
+  const link = document.createElement('a');
+  link.href = 'https://schoolsafe1.cc.cd';
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.className = 'button button-primary';
+  link.dataset.schoolsafeLink = '';
+  link.textContent = 'Découvrir SchoolSafe';
+  link.setAttribute('aria-label', 'Découvrir SchoolSafe dans un nouvel onglet');
+  projectCopy.append(link);
+}
+
 export function translatePage(language) {
   const lang = normalizeLanguage(language);
   const catalog = translations[lang];
@@ -12,6 +27,18 @@ export function translatePage(language) {
     const key = node.dataset.i18n;
     if (catalog[key]) node.textContent = catalog[key];
   });
+
+  const schoolSafeLink = document.querySelector('[data-schoolsafe-link]');
+  if (schoolSafeLink) {
+    const isEnglish = lang === 'en';
+    schoolSafeLink.textContent = isEnglish ? 'Discover SchoolSafe' : 'Découvrir SchoolSafe';
+    schoolSafeLink.setAttribute(
+      'aria-label',
+      isEnglish
+        ? 'Discover SchoolSafe in a new tab'
+        : 'Découvrir SchoolSafe dans un nouvel onglet'
+    );
+  }
 
   document.querySelectorAll('[data-lang]').forEach((button) => {
     const active = button.dataset.lang === lang;
@@ -56,6 +83,7 @@ function initYear() {
   if (node) node.textContent = String(new Date().getFullYear());
 }
 
+ensureSchoolSafeLink();
 initLanguage();
 initNavigation();
 initYear();
