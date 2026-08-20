@@ -37,12 +37,45 @@ ni date de création, ni effectif, ni client, ni chiffre.
 2. **Le cachet et l'article 2** ne portent donc pas la même orthographe. À
    arbitrer avec le greffe, pas ici.
 
+## La filiation — deux entités, une lignée
+
+Le site porte désormais une section « Notre filiation », établie à partir des
+**statuts notariés de la FONDATION PRODELI** (Office Notarial, Ministère de la
+Justice et Garde des Sceaux) :
+
+- **Fondation PRODELI** — association sans but lucratif fondée par **Denis
+  Lomela Ifangwa**, le père. Objectif (article 3) : assistance, promotion et
+  défense des droits inaliénables des peuples autochtones, paysans, veuves,
+  orphelins et enfants abandonnés ; protection de l'environnement. Moyens
+  (article 4) : microprojets exécutés par les membres et les nécessiteux
+  eux-mêmes.
+- **PRO.DE.L.I SARLU** — la société, constituée par **Lomela Ifangwa Medy**,
+  le fils. « Progéniture de Denis Lomela Ifangwa » : la même conviction portée
+  dans le champ de l'entreprise.
+
+Le proverbe mongo cité en préface de la Fondation — **« LIMPUMPU JA NKOY,
+BONENE W'EKOTO »**, « un jeune léopard, mais une grande fourrure » — est la
+source directe de la conviction reprise au préambule des statuts de la société.
+Il figure désormais sur le site.
+
+Une note en bas de section rappelle que **les deux entités sont juridiquement
+distinctes** et que la société n'exerce aucune activité sans but lucratif au
+nom de la fondation.
+
+### Ce que ces documents tranchent
+
+La signature du père est **Denis LOMELA IFANGWA**. Le gérant de la société est
+**LOMELA IFANGWA Medy**. Le `LOMEA` de l'article 2 des statuts de la SARLU est
+donc une **faute de frappe dans l'acte**, et non une orthographe alternative.
+Le site continue de publier l'article 2 tel quel — c'est lui qui fait foi — mais
+l'écart est désormais documenté ici.
+
 ## Contenu
 
-Page unique : accueil · conviction et principes · objet social · projet
-SchoolSafe · coopérations · contact · mentions légales. Plus une page 404.
+Page unique : accueil · conviction et principes · filiation · objet social ·
+projet SchoolSafe · coopérations · contact · mentions légales. Plus une page 404.
 
-Français et anglais côté client, à parité stricte (110 clés de chaque côté).
+Français et anglais côté client, à parité stricte (129 clés de chaque côté).
 La langue suit `?lang=`, puis le choix mémorisé, puis celle du navigateur.
 
 ## Développement

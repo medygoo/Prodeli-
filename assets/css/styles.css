@@ -145,7 +145,7 @@ h3{font-size:1.05rem;line-height:1.35;font-weight:700}
   .grid-3,.grid-2,.principes,.legal-grid{grid-template-columns:1fr}
   .section{padding:3.5rem 0}
 }
-@media(max-width:760px){
+@media(max-width:1000px){
   .menu-button{display:inline-flex}
   .primary-nav{display:none;position:absolute;top:78px;left:0;right:0;background:#fff;border-bottom:1px solid var(--filet);flex-direction:column;padding:.75rem;gap:.15rem;box-shadow:0 18px 40px rgba(16,24,19,.1)}
   .primary-nav.is-open{display:flex}
@@ -153,3 +153,13 @@ h3{font-size:1.05rem;line-height:1.35;font-weight:700}
   .site-header{position:relative}
   .legal-grid div{grid-template-columns:1fr;gap:.15rem}
 }
+
+/* ── filiation ── */
+.proverbe{margin:0 auto 2.5rem;max-width:var(--max);text-align:center;padding:2.2rem 1.5rem;background:#fff;border:1px solid var(--filet);border-radius:var(--r)}
+.proverbe blockquote{margin:0 0 1rem;font-size:clamp(1.15rem,2.6vw,1.65rem);font-weight:750;letter-spacing:-.02em;color:var(--vert-fonce);line-height:1.25}
+.proverbe figcaption{max-width:64ch;margin-inline:auto;color:var(--gris);font-size:.95rem}
+.proverbe cite{display:block;margin-top:.9rem;font-style:normal;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--vert-fonce)}
+.lignee{display:flex;flex-direction:column;gap:.6rem}
+.lignee-role{margin:0;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--rouge-fonce)}
+.lignee h3{font-size:1.25rem;margin:0}
+.lignee-detail{border-top:1px solid var(--filet);padding-top:.9rem;margin-top:.4rem!important;font-size:.88rem!important}
