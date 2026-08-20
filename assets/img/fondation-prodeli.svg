@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" role="img" aria-label="Fondation PRODELI">
+  <title>Fondation PRODELI</title>
+  <!-- Le losange porte « DL » : les initiales de Denis Lomela.
+       Vert relevé sur le logo fourni : #009028. Le blanc sur ce vert donne
+       3,89:1 — conforme en TRÈS grands caractères seulement, ce qui est le
+       cas ici. Ce vert ne doit jamais porter de texte courant. -->
+  <path d="M100 6 164 70 100 134 36 70Z" fill="#009028"/>
+  <text x="100" y="70" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif"
+        font-weight="600" font-size="52" fill="#ffffff" letter-spacing="1">DL</text>
+  <text x="100" y="170" text-anchor="middle"
+        font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif"
+        font-weight="400" font-size="34" fill="#101813" letter-spacing="-0.5">Fondation</text>
+  <text x="100" y="203" text-anchor="middle"
+        font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif"
+        font-weight="800" font-size="37" fill="#101813" letter-spacing="-1">PRODELI</text>
+</svg>

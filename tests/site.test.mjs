@@ -149,3 +149,16 @@ test('l’histoire du fondateur porte son portrait et ses dates', () => {
       `${langue} : le portrait doit avoir une description alternative nommée`);
   }
 });
+
+test('chaque entité porte son propre emblème', () => {
+  assert.ok(html.includes('/assets/img/fondation-mark.svg'), 'emblème de la Fondation absent');
+  assert.ok(html.includes('/assets/img/mark.svg'), 'emblème de la société absent');
+  /* Les deux emblèmes sont décoratifs : le nom est déjà le titre de la carte.
+     Un alt vide est donc correct, un alt qui répète le titre serait du bruit
+     pour un lecteur d'écran. */
+  const cartes = html.split('class="card lignee"').slice(1);
+  assert.equal(cartes.length, 2, 'il doit y avoir exactement deux cartes de lignée');
+  for (const carte of cartes) {
+    assert.ok(/<img class="lignee-logo"[^>]*alt=""/.test(carte), 'emblème décoratif sans alt vide');
+  }
+});

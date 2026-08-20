@@ -119,6 +119,19 @@ faudrait le fichier vectoriel d'origine.
 `assets/img/mark.svg` en est l'emblème seul, pour les petites tailles et l'icône
 d'onglet.
 
+### Le logo de la Fondation
+
+`assets/img/fondation-prodeli.svg` est le logo complet — losange vert, « DL »
+pour Denis Lomela, et le mot-symbole « Fondation PRODELI ».
+`assets/img/fondation-mark.svg` est le losange seul : c'est lui qui figure sur
+la carte du site, parce que le nom y est déjà le titre et que le lockup complet
+ferait doublon.
+
+Vert relevé sur le logo fourni : **`#009028`**. Le blanc dessus donne **3,89:1** —
+conforme uniquement en très grands caractères, ce qui est le cas du « DL ».
+**Ce vert ne doit jamais porter de texte courant** ; la charte du site emploie
+`#0A7A45` (5,41:1) pour cela.
+
 ## Déploiement
 
 La racine est publiable telle quelle sur GitHub Pages ou Cloudflare Pages. Le

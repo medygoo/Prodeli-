@@ -189,3 +189,4 @@ h3{font-size:1.05rem;line-height:1.35;font-weight:700}
    Sous 1000 px l'en-tête n'est plus collant : la marge redevient inutile. */
 section[id]{scroll-margin-top:96px}
 @media(max-width:1000px){section[id]{scroll-margin-top:1rem}}
+.lignee-logo{width:56px;height:56px;margin-bottom:.3rem}
