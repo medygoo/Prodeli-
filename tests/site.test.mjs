@@ -139,3 +139,13 @@ test('aucune donnée sensible n’a atterri dans le dépôt', () => {
     assert.ok(!/BEGIN [A-Z ]*PRIVATE KEY|api[_-]?key\s*[:=]/i.test(contenu), `secret possible dans ${chemin}`);
   }
 });
+
+test('l’histoire du fondateur porte son portrait et ses dates', () => {
+  assert.ok(html.includes('assets/img/denis-lomela-ifangwa.jpg'), 'portrait absent');
+  assert.ok(html.includes('datetime="1957-08-18"') && html.includes('datetime="2023-05-22"'),
+    'les dates doivent être en <time datetime> pour être lisibles par une machine');
+  for (const langue of ['fr', 'en']) {
+    assert.ok(translations[langue]['lineage.portraitAlt'].includes('Lomela Ifangwa'),
+      `${langue} : le portrait doit avoir une description alternative nommée`);
+  }
+});

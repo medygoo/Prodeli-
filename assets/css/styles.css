@@ -163,3 +163,29 @@ h3{font-size:1.05rem;line-height:1.35;font-weight:700}
 .lignee-role{margin:0;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--rouge-fonce)}
 .lignee h3{font-size:1.25rem;margin:0}
 .lignee-detail{border-top:1px solid var(--filet);padding-top:.9rem;margin-top:.4rem!important;font-size:.88rem!important}
+
+/* ── le fondateur ── */
+.mem{display:grid;grid-template-columns:210px 1fr;gap:2.2rem;align-items:center;background:#fff;border:1px solid var(--filet);border-radius:var(--r);padding:1.8rem 2rem;margin-bottom:2.5rem}
+.mem-photo{width:210px;height:auto;border-radius:var(--r-s);border:1px solid var(--filet);filter:saturate(.9)}
+.mem-role{margin:0 0 .35rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--rouge-fonce)}
+.mem-name{font-size:clamp(1.3rem,2.6vw,1.75rem);margin:0}
+.mem-dates{margin:.35rem 0 1rem;font-size:.92rem;color:var(--gris);font-variant-numeric:tabular-nums;padding-bottom:1rem;border-bottom:1px solid var(--filet)}
+.mem-copy > p:last-child{margin:0;color:var(--gris);font-size:.95rem;max-width:62ch}
+.chaine{list-style:none;margin:0 auto 2.5rem;padding:0;display:grid;gap:0;counter-reset:etape}
+.chaine li{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;padding:1.4rem 0;border-top:1px solid var(--filet)}
+.chaine li:first-child{border-top:0;padding-top:0}
+.chaine-num{width:34px;height:34px;flex:none;border-radius:50%;background:var(--vert);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem}
+.chaine h3{margin:0 0 .4rem;font-size:1.05rem}
+.chaine p{margin:0;color:var(--gris);font-size:.95rem;max-width:78ch}
+@media(max-width:760px){
+  .mem{grid-template-columns:1fr;gap:1.4rem;padding:1.4rem;text-align:left}
+  .mem-photo{width:160px}
+}
+
+/* ── ancres et en-tête collant ──
+   Sans cette marge, un lien du menu amène la section SOUS l'en-tête.
+   Mesuré : #mentions arrivait à 56 px pour un en-tête de 79 px, et les
+   autres ne passaient qu'à un pixel près — par chance, pas par dessin.
+   Sous 1000 px l'en-tête n'est plus collant : la marge redevient inutile. */
+section[id]{scroll-margin-top:96px}
+@media(max-width:1000px){section[id]{scroll-margin-top:1rem}}
