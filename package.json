@@ -1,0 +1,12 @@
+{
+  "name": "prodeli-site",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Site institutionnel de PRO.DE.L.I SARLU — statique, bilingue, sans dépendance.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "license": "UNLICENSED"
+}

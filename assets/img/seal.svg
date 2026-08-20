@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Cachet officiel PRODELI SARLU — République Démocratique du Congo">
+  <title>PRODELI SARLU</title>
+  <defs>
+    <path id="arcHaut" d="M 200 200 m -163 0 a 163 163 0 0 1 326 0"/>
+    <path id="arcBas"  d="M 37 200 A 163 163 0 0 0 363 200"/>
+  </defs>
+  <g fill="none" stroke="#101813">
+    <circle cx="200" cy="200" r="192" stroke-width="4"/>
+    <circle cx="200" cy="200" r="178" stroke-width="2.5"/>
+    <circle cx="200" cy="200" r="146" stroke-width="2.5"/>
+  </g>
+  <circle cx="34" cy="200" r="7" fill="#101813"/>
+  <circle cx="366" cy="200" r="7" fill="#101813"/>
+  <g fill="#101813" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-weight="600" font-size="21" letter-spacing="0.6">
+    <text><textPath href="#arcHaut" startOffset="50%" text-anchor="middle">République Démocratique du Congo</textPath></text>
+    <text font-size="17.5" letter-spacing="0.3"><textPath href="#arcBas" startOffset="50%" text-anchor="middle">Progéniture de Dénis Lomela Ifangwa sarlu</textPath></text>
+  </g>
+  <!-- L'emblème : les tours de la construction, la flèche rouge de la progression,
+       les flèches noires de l'essaimage. Redessiné d'après le cachet officiel. -->
+  <g transform="translate(200,168)">
+    <path d="M-52 44 V-6 l22-12 v62 Z" fill="#1c2420"/>
+    <path d="M-26 44 V-42 l24-14 v100 Z" fill="#0A7A45"/>
+    <path d="M0 44 V-56 l24 14 v86 Z" fill="#0A7A45"/>
+    <path d="M-2 -55 v99 h4 v-99 Z" fill="#101813" opacity=".55"/>
+    <path d="M26 44 V-40 l20 12 v72 Z" fill="#1c2420"/>
+    <path d="M-58 46 q30 12 62 12 t62-12 v6 q-30 14 -62 14 t-62-14 Z" fill="#101813" opacity=".8"/>
+    <path d="M-50 40 q40 -6 74 -34 l14 -12 8 9 -16 14 q-38 32 -80 38 Z" fill="#C6372D"/>
+    <path d="M40 -22 l24 -8 -6 24 Z" fill="#C6372D"/>
+    <g stroke="#101813" stroke-width="3" fill="none" stroke-linecap="round">
+      <path d="M44 4 l26 -22"/><path d="M50 -12 l26 -22"/><path d="M56 -30 l24 -20"/><path d="M46 20 l28 -18"/>
+    </g>
+    <g fill="#101813">
+      <path d="M70 -18 l10 -8 -1 12 Z"/><path d="M76 -34 l10 -8 -1 12 Z"/><path d="M80 -50 l10 -8 -1 12 Z"/><path d="M74 2 l10 -8 -1 12 Z"/>
+    </g>
+  </g>
+  <text x="200" y="272" text-anchor="middle" fill="#101813" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-weight="700" font-size="54" letter-spacing="-1">Prodeli</text>
+  <text x="200" y="304" text-anchor="middle" fill="#101813" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-weight="600" font-size="27">sarlu</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="PRODELI SARLU">
+  <g transform="translate(58,62)">
+    <path d="M-52 44 V-6 l22-12 v62 Z" fill="#1c2420"/>
+    <path d="M-26 44 V-42 l24-14 v100 Z" fill="#0A7A45"/>
+    <path d="M0 44 V-56 l24 14 v86 Z" fill="#0A7A45"/>
+    <path d="M-2 -55 v99 h4 v-99 Z" fill="#101813" opacity=".55"/>
+    <path d="M26 44 V-40 l20 12 v72 Z" fill="#1c2420"/>
+    <path d="M-58 46 q30 12 62 12 t62-12 v6 q-30 14 -62 14 t-62-14 Z" fill="#101813" opacity=".8"/>
+    <path d="M-50 40 q40 -6 74 -34 l14 -12 8 9 -16 14 q-38 32 -80 38 Z" fill="#C6372D"/>
+    <path d="M40 -22 l24 -8 -6 24 Z" fill="#C6372D"/>
+    <g stroke="#101813" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M44 4 l16 -14"/><path d="M50 -12 l16 -14"/><path d="M56 -30 l14 -12"/>
+    </g>
+  </g>
+</svg>
