@@ -53,7 +53,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   backdrop-filter: blur(14px);
 }
 .header-inner {
-  min-height: 76px;
+  min-height: 94px;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -61,20 +61,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 .brand {
   display: inline-flex;
-  gap: .75rem;
+  gap: .9rem;
   align-items: center;
   text-decoration: none;
 }
 .brand img {
-  width: 52px;
-  height: 52px;
+  width: 78px;
+  height: 78px;
   object-fit: cover;
   border-radius: 50%;
   border: 2px solid #fff;
-  box-shadow: 0 0 0 1px var(--line);
+  box-shadow: 0 0 0 1px var(--line), 0 8px 24px rgba(10, 52, 31, .12);
 }
 .brand-copy { display: grid; line-height: 1; letter-spacing: .05em; }
-.brand-copy strong { font-size: 1.02rem; }
+.brand-copy strong { font-size: 1.08rem; }
 .brand-copy small { margin-top: .25rem; color: var(--green); font-weight: 800; letter-spacing: .18em; }
 .primary-nav { display: flex; justify-content: center; align-items: center; gap: .9rem; }
 .primary-nav a {
@@ -263,8 +263,8 @@ textarea { resize: vertical; }
   .shell { width: min(calc(100% - 1.25rem), var(--max)); }
   .section { padding: 4rem 0; }
   .brand-copy { display: none; }
-  .header-inner { min-height: 66px; gap: .6rem; }
-  .brand img { width: 46px; height: 46px; }
+  .header-inner { min-height: 82px; gap: .6rem; }
+  .brand img { width: 66px; height: 66px; }
   .menu-button span:last-child { display: none; }
   .hero-grid { gap: 2rem; }
   h1 { font-size: clamp(2.6rem, 15vw, 4rem); }
