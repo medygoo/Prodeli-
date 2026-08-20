@@ -53,6 +53,22 @@ Justice et Garde des Sceaux) :
   le fils. « Progéniture de Denis Lomela Ifangwa » : la même conviction portée
   dans le champ de l'entreprise.
 
+### La lignée — cinq personnes nommées
+
+La section « Notre histoire » suit **une phrase qui passe de main en main
+jusqu'à devenir un article de statuts** :
+
+| | | ce qu'il ou elle transmet | ce que ça devient |
+|---|---|---|---|
+| **Grégoire Ifangwa** | le grand-père | « les études, toujours les études… on ne devient jamais savant par le savoir de ses parents » | « l'éducation, la recherche du savoir et le perfectionnement continu constituent des clés de prospérité, d'autonomie et de stabilité » |
+| **Marie Lokwa** | la grand-mère | « l'amour, l'humilité et la bonté… appelle papa ou maman toute personne de l'âge de tes parents » | « la promotion de l'amour du prochain, du respect, de l'humilité, de la bonté » |
+| **Marie Josée Bokungu Ifangwa** | la tante paternelle | « pilier incontesté de la promotion actuelle de cette progéniture » | citée par Denis au même rang que David contre Goliath et Jeanne d'Arc |
+| **Denis Lomela Ifangwa** | le père · 18 août 1957 – 22 mai 2023 | « ce sont là autant d'armes ultra-modernes déjà affûtées que je mets à ta disposition » | fonde la Fondation, écrit et signe la préface |
+| **Lomela Ifangwa Medy** | le fils | « la grandeur d'une personne ne dépend ni de son âge, ni de son sexe, ni de sa force physique » | constitue la société en avril 2026 et reprend la préface clause par clause |
+
+Chaque citation est reprise **textuellement** des deux actes. Les noms sont
+publiés à la demande expresse de Loms.
+
 Le proverbe mongo cité en préface de la Fondation — **« LIMPUMPU JA NKOY,
 BONENE W'EKOTO »**, « un jeune léopard, mais une grande fourrure » — est la
 source directe de la conviction reprise au préambule des statuts de la société.

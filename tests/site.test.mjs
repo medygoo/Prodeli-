@@ -162,3 +162,19 @@ test('chaque entité porte son propre emblème', () => {
     assert.ok(/<img class="lignee-logo"[^>]*alt=""/.test(carte), 'emblème décoratif sans alt vide');
   }
 });
+
+test('les cinq personnes de la lignée sont nommées, chacune avec sa citation', () => {
+  const gens = ['Grégoire Ifangwa', 'Marie Lokwa', 'Marie Josée Bokungu Ifangwa',
+                'Denis Lomela Ifangwa', 'Lomela Ifangwa Medy'];
+  for (const nom of gens) assert.ok(html.includes(nom), `absent de la lignée : ${nom}`);
+  for (const langue of ['fr', 'en']) {
+    for (let i = 1; i <= 5; i += 1) {
+      /* Un nom sans ce qu'il a transmis n'est qu'un trombinoscope : chaque
+         entrée doit porter son rôle, sa citation et sa suite. */
+      for (const suffixe of ['Role', 'Quote', 'Echo']) {
+        const cle = `gen.${i}${suffixe}`;
+        assert.ok(translations[langue][cle], `${langue} : ${cle} manquant`);
+      }
+    }
+  }
+});
