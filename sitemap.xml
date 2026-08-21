@@ -7,4 +7,11 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://prodeli-sarlu.cc.cd/schoolsafe/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://prodeli-sarlu.cc.cd/schoolsafe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://prodeli-sarlu.cc.cd/schoolsafe/?lang=en"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

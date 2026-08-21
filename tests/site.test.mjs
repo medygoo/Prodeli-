@@ -12,6 +12,12 @@ const lire = (f) => readFileSync(join(racine, f), 'utf8');
 const html = lire('index.html');
 const html404 = lire('404.html');
 
+/* Un contrôle qui ne couvre qu'un fichier ne protège que ce fichier.
+   Toute page HTML du site entre ici — sinon la suivante arrivera chez le
+   visiteur sans qu'un seul test l'ait regardée. */
+const PAGES = ['index.html', '404.html', 'schoolsafe/index.html'];
+const pages = Object.fromEntries(PAGES.map((f) => [f, lire(f)]));
+
 /* ── Ce que les statuts et le RCCM fixent ─────────────────────────────
    Ces valeurs ne se déduisent pas : elles viennent de l'acte constitutif.
    Un test qui les garde empêche qu'une reprise de style les efface.      */
@@ -97,13 +103,20 @@ test('parité FR / EN : mêmes clés, aucune vide', () => {
   }
 });
 
-test('toute clé employée dans la page existe, et aucune ne dort', () => {
-  const employees = new Set(
-    [...html.matchAll(/data-i18n(?:-doc|-alt|-label)?="([^"]+)"/g)].map((m) => m[1])
-  );
+test('toute clé employée dans une page existe, et aucune ne dort', () => {
+  const employees = new Map();
+  for (const [fichier, source] of Object.entries(pages)) {
+    for (const m of source.matchAll(/data-i18n(?:-doc|-alt|-label)?="([^"]+)"/g)) {
+      employees.set(m[1], fichier);
+    }
+  }
   const catalogue = new Set(Object.keys(translations.fr));
-  for (const cle of employees) assert.ok(catalogue.has(cle), `clé employée et absente du catalogue : ${cle}`);
-  for (const cle of catalogue) assert.ok(employees.has(cle), `clé du catalogue jamais employée : ${cle}`);
+  for (const [cle, fichier] of employees) {
+    assert.ok(catalogue.has(cle), `clé employée dans ${fichier} et absente du catalogue : ${cle}`);
+  }
+  for (const cle of catalogue) {
+    assert.ok(employees.has(cle), `clé du catalogue employée par aucune page : ${cle}`);
+  }
 });
 
 test('le lien SchoolSafe n’apparaît qu’une seule fois', () => {
@@ -130,7 +143,7 @@ test('la page 404 tient depuis n’importe quelle profondeur d’URL', () => {
 
 test('toutes les ressources référencées existent', () => {
   const refs = new Set();
-  for (const page of [html, html404]) {
+  for (const page of Object.values(pages)) {
     for (const m of page.matchAll(/(?:href|src)="(\/assets\/[^"]+)"/g)) refs.add(m[1]);
   }
   assert.ok(refs.size >= 4, 'aucune ressource détectée — le test ne vérifie rien');
@@ -211,4 +224,147 @@ test('les marques sont vectorielles, donc nettes à toute taille', () => {
   }
   assert.ok(!/\.jpg"/.test(html.replace(/denis-lomela-ifangwa\.jpg/g, '')),
     'une marque en JPG subsiste dans la page');
+});
+
+/* ══ La page SchoolSafe ═══════════════════════════════════════════════
+   Elle est le projet que la société met en avant. Ce qui la tient debout
+   se vérifie ici, pas à l'œil sur le site publié.                       */
+
+test('la page SchoolSafe existe et se rattache au site', () => {
+  const ss = pages['schoolsafe/index.html'];
+  assert.ok(ss.includes('href="/assets/css/styles.css"'), 'la page n’emprunte pas la feuille du site');
+  assert.ok(ss.includes('src="/assets/js/main.js"'), 'sans main.js, ni traduction ni menu');
+  assert.ok(ss.includes('<link rel="canonical" href="https://prodeli-sarlu.cc.cd/schoolsafe/">'),
+    'canonique absente : deux adresses pour une seule page');
+  assert.ok(lire('sitemap.xml').includes('/schoolsafe/'), 'la page n’est pas dans le sitemap');
+});
+
+test('les deux pages portent EXACTEMENT le même menu', () => {
+  /* Deux menus qui divergent, c'est un visiteur qui perd une entrée en
+     changeant de page — et personne ne s'en aperçoit avant lui. */
+  const menu = (source) => {
+    const bloc = source.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/);
+    assert.ok(bloc, 'barre de navigation introuvable');
+    return [...bloc[0].matchAll(/<a href="([^"]+)"/g)].map((m) => m[1].replace(/^\/#/, '#'));
+  };
+  assert.deepEqual(menu(pages['schoolsafe/index.html']), menu(html),
+    'les deux barres de navigation ne portent pas les mêmes destinations');
+});
+
+test('l’accueil mène à la page SchoolSafe, et l’application reste joignable', () => {
+  assert.ok(html.includes('href="/schoolsafe/"'), 'aucun chemin de l’accueil vers la page SchoolSafe');
+  const liens = html.match(/schoolsafe1\.cc\.cd/g) || [];
+  assert.equal(liens.length, 1, 'le lien vers l’application a été dupliqué ou perdu');
+});
+
+test('la carte de partage est une image que WhatsApp sait rendre', () => {
+  /* Un SVG en og:image ne s'affiche ni sur WhatsApp, ni sur Facebook, ni
+     sur LinkedIn : le lien partagé part alors sans aucune image. */
+  for (const [fichier, source] of Object.entries(pages)) {
+    if (fichier === '404.html') continue;
+    const og = source.match(/property="og:image" content="([^"]+)"/);
+    assert.ok(og, `${fichier} : aucune image de partage`);
+    assert.ok(og[1].endsWith('.png'), `${fichier} : og:image doit être un PNG, pas ${og[1].split('.').pop()}`);
+    const local = og[1].replace('https://prodeli-sarlu.cc.cd', '');
+    assert.ok(existsSync(join(racine, local)), `${fichier} : image de partage introuvable — ${local}`);
+    assert.ok(source.includes('content="1200"') && source.includes('content="630"'),
+      `${fichier} : les dimensions de l’image doivent être déclarées`);
+  }
+});
+
+test('le logo SchoolSafe ne paraît que sur fond sombre', () => {
+  /* Le mot « School » est écrit en BLANC dans ce logo : posé sur une
+     section claire, la moitié du nom disparaît. Ce n'est pas une
+     préférence d'ambiance, c'est une contrainte de l'image. */
+  const css = lire('assets/css/styles.css');
+  for (const [fichier, source] of Object.entries(pages)) {
+    for (const m of source.matchAll(/<img[^>]*schoolsafe-logo\.png[^>]*>/g)) {
+      const classe = (m[0].match(/class="([^"]*)"/) || [, ''])[1];
+      assert.ok(/ss-logo|ss-marque/.test(classe),
+        `${fichier} : le logo doit porter .ss-logo ou .ss-marque pour être placé — vu « ${classe} »`);
+    }
+  }
+  /* .ss-logo vit dans .ss-hero, qui est une section-encre ; .ss-marque
+     vit dans #projets, également section-encre. Les deux sections sont
+     déclarées sombres dans la page, on le vérifie. */
+  const ss = pages['schoolsafe/index.html'];
+  assert.ok(/class="section section-encre ss-hero"/.test(ss), '.ss-hero n’est plus sur fond encre');
+  assert.ok(/class="section section-encre" id="projets"/.test(html), '#projets n’est plus sur fond encre');
+  assert.ok(css.includes('.section-encre{background:var(--encre)'), 'section-encre n’est plus sombre');
+});
+
+test('le vert WhatsApp porte son texte blanc — mesuré, pas estimé', () => {
+  /* Le vert de marque #25D366 donne 1,98:1 sous du blanc : illisible.
+     Agrandir le bouton n'y change rien, il faut assombrir le fond. */
+  const lum = (hex) => {
+    const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+      .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  };
+  const rapport = (a, b) => {
+    const [x, y] = [lum(a), lum(b)];
+    return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+  };
+  assert.ok(rapport('#ffffff', '#25D366') < 4.5, 'le test ne mesure rien s’il valide le vert de marque');
+
+  const css = lire('assets/css/styles.css');
+  const fonds = new Set();
+  for (const regle of css.match(/\.(?:button-wa|wa-flottant)[^{]*\{[^}]*\}/g) || []) {
+    for (const m of regle.matchAll(/background:(#[0-9a-fA-F]{6})/g)) fonds.add(m[1]);
+  }
+  assert.ok(fonds.size >= 2, 'aucun fond WhatsApp trouvé — le test ne vérifie rien');
+  for (const fond of fonds) {
+    const r = rapport('#ffffff', fond);
+    assert.ok(r >= 4.5, `blanc sur ${fond} : ${r.toFixed(2)}:1 — sous le seuil AA`);
+  }
+});
+
+test('tout chemin interne mène à un fichier qui existe', () => {
+  for (const [fichier, source] of Object.entries(pages)) {
+    for (const m of source.matchAll(/href="(\/[^"#?]*)"/g)) {
+      const cible = m[1];
+      if (cible.startsWith('/assets/')) continue;
+      const sur_disque = cible.endsWith('/') ? join(cible, 'index.html') : cible;
+      assert.ok(existsSync(join(racine, sur_disque)),
+        `${fichier} : lien mort vers ${cible}`);
+    }
+  }
+});
+
+test('chaque tracé SVG se parse — une icône cassée disparaît en silence', () => {
+  /* Un « d » mal formé ne lève aucune erreur visible : le navigateur
+     refuse le tracé entier et l'icône n'est simplement pas dessinée.
+     C'est arrivé ici — un espace perdu avait collé « .5 0 » en « .50 »,
+     et les deux boutons WhatsApp de l'accueil n'avaient plus d'icône.
+     Le nombre de coordonnées de chaque commande le dit. */
+  const ARITE = { M: 2, L: 2, T: 2, H: 1, V: 1, C: 6, S: 4, Q: 4, A: 7, Z: 0 };
+  const NOMBRE = /-?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g;
+
+  let traces = 0;
+  for (const [fichier, source] of Object.entries(pages)) {
+    for (const m of source.matchAll(/<path[^>]*\sd="([^"]+)"/g)) {
+      traces += 1;
+      const d = m[1];
+      /* on découpe sur les lettres de commande */
+      const morceaux = d.split(/(?=[MmLlHhVvCcSsQqTtAaZz])/).filter((x) => x.trim());
+      for (const morceau of morceaux) {
+        const cmd = morceau[0];
+        const arite = ARITE[cmd.toUpperCase()];
+        assert.notEqual(arite, undefined, `${fichier} : commande inconnue « ${cmd} »`);
+        const nombres = morceau.slice(1).match(NOMBRE) || [];
+        /* le reste du morceau, une fois les nombres retirés, ne doit
+           contenir que des séparateurs — sinon un caractère traîne */
+        const reste = morceau.slice(1).replace(NOMBRE, '').replace(/[\s,]/g, '');
+        assert.equal(reste, '', `${fichier} : caractère parasite dans « ${morceau.slice(0, 30)} »`);
+        if (arite === 0) {
+          assert.equal(nombres.length, 0, `${fichier} : « ${cmd} » ne prend aucune coordonnée`);
+        } else {
+          assert.equal(nombres.length % arite, 0,
+            `${fichier} : « ${cmd} » attend un multiple de ${arite} coordonnées, ` +
+            `il en reçoit ${nombres.length} — « ${morceau.slice(0, 40)}… »`);
+        }
+      }
+    }
+  }
+  assert.ok(traces >= 20, `seulement ${traces} tracés inspectés — le test ne vérifie presque rien`);
 });
