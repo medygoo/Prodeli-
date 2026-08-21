@@ -3,13 +3,13 @@
 Site vitrine statique et bilingue de **PROGENITURE DENIS LOMEA IFANGWA SARLU**,
 en sigle **PRO.DE.L.I SARLU**, pour le domaine `https://prodeli-sarlu.cc.cd/`.
 
-Aucune dépendance applicative, aucun script tiers, aucun cookie, aucune base de
-données. Trois fichiers JavaScript, une feuille de style, deux images SVG.
+Aucune dépendance applicative, aucun script tiers, aucun cookie. Trois fichiers
+JavaScript, une feuille de style.
 
 ## La source de vérité
 
-Le contenu institutionnel — dénomination, siège, objet social, capital, gérance,
-durée, exercice — **n'est pas rédigé librement : il est repris des statuts**
+Le contenu institutionnel — dénomination, siège, objet social, gérant —
+**n'est pas rédigé librement : il est repris des statuts**
 (avril 2026, Acte uniforme OHADA). Chaque valeur est gardée par un test.
 
 | ce qui est publié | article des statuts |
@@ -17,11 +17,16 @@ durée, exercice — **n'est pas rédigé librement : il est repris des statuts*
 | dénomination et sigle | article 2 |
 | siège social | fixé par Loms (voir ci-dessous) |
 | objet social (6 domaines) | article 4 |
-| durée — 99 ans | article 5 |
-| capital — 1 500 USD, 100 parts de 15 USD | articles 6 et 7 |
-| gérance — LOMELA IFANGWA Medy | article 14 |
-| exercice social — 1er janvier au 31 décembre | article 19 |
-| juridiction — Kinshasa | article 27 |
+| gérant — LOMELA IFANGWA Medy | article 14 |
+| RCCM et identification nationale | immatriculation |
+
+**Ce qui a été RETIRÉ, et qui ne doit pas revenir** — décision de Loms, le
+20 août 2026 : le capital social, la répartition des parts, la mention
+« associé unique », la durée statutaire, l'exercice social, la juridiction
+compétente, le détail technique du site et la banque. Un partenaire tire une
+conclusion sur la taille de la société avant d'avoir lu ce qu'elle fait, et
+aucune loi n'oblige à publier cela. **Un test garde leur absence** : il échoue
+si l'un d'eux reparaît, dans la page comme dans les catalogues de traduction.
 
 Le préambule des statuts fournit la conviction affichée en page d'accueil et les
 deux listes « ce que la société rejette / promeut ». **Rien n'a été inventé** :
@@ -95,11 +100,27 @@ l'écart est désormais documenté ici.
 
 ## Contenu
 
-Page unique : accueil · conviction et principes · filiation · objet social ·
-projet SchoolSafe · coopérations · contact · mentions légales. Plus une page 404.
+**Deux pages**, plus une page 404 :
 
-Français et anglais côté client, à parité stricte (129 clés de chaque côté).
+| | |
+|---|---|
+| `/` | conviction et principes · histoire et lignée · objet social · projet SchoolSafe · coopérations · contact · mentions légales |
+| `/schoolsafe/` | le portail · la caisse · les documents officiels congolais · le hors-ligne · les six profils |
+
+Les deux portent **exactement le même menu** — un test le vérifie, parce que
+deux barres qui divergent font perdre une entrée en changeant de page.
+
+Français et anglais côté client, à parité stricte (203 clés de chaque côté).
 La langue suit `?lang=`, puis le choix mémorisé, puis celle du navigateur.
+
+### La page SchoolSafe
+
+Elle décrit le projet de la société **à partir de ce que l'application fait
+réellement**, pas d'une liste de promesses. Le logo réel y sert de marque —
+et le mot « School » y est écrit en **blanc** : ce logo ne tient que sur fond
+sombre. C'est une contrainte de l'image, pas un choix d'ambiance, et un test
+la garde : toute occurrence du logo doit porter `.ss-logo` ou `.ss-marque`,
+qui ne vivent que dans des sections `section-encre`.
 
 ## Développement
 
@@ -113,14 +134,32 @@ python3 -m http.server 8080   # ou : npm start
 npm test
 ```
 
-Onze tests, sans aucune dépendance (`node --test`). Ils vérifient :
+**Vingt-quatre tests**, sans aucune dépendance (`node --test`). Ils lisent
+**les trois pages**, pas seulement l'accueil : un contrôle qui ne couvre qu'un
+fichier ne protège que ce fichier.
 
-- que la dénomination, le siège, la gérance, le capital, le RCCM et l'ID
-  national publiés sont bien ceux des statuts ;
+Ce qu'ils vérifient :
+
+- que la dénomination, le siège, le gérant, le RCCM et l'ID national publiés
+  sont bien ceux des statuts ;
+- **que le capital, la structure de propriété, la durée, la banque et le détail
+  technique ne sont PAS publiés** — le test garde une absence, pas une présence ;
 - que le téléphone est au format international et que l'e-mail est le bon ;
 - la parité FR/EN, l'absence de clé vide, de clé employée sans traduction et de
   traduction jamais employée ;
-- que le bouton SchoolSafe n'est pas dupliqué ;
+- que les deux pages portent le même menu, et que l'accueil mène bien à
+  `/schoolsafe/` ;
+- que la carte de partage est un **PNG** — WhatsApp, Facebook et LinkedIn ne
+  rendent pas le SVG, et le lien partagé partirait alors sans image ;
+- que le logo SchoolSafe ne paraît que sur fond sombre ;
+- **que le vert des boutons WhatsApp porte son texte blanc, mesuré** : le vert
+  de marque `#25D366` donne 1,98:1 et `#128C7E` 4,14:1 — tous deux sous le
+  seuil. Le site emploie `#0F7A6E` (5,21:1) et `#0B665C` au survol (6,84:1) ;
+- **que chaque tracé SVG se parse** : un `d` mal formé ne lève aucune erreur
+  visible, le navigateur refuse le tracé entier et l'icône disparaît. C'est
+  arrivé ici — un espace perdu avait collé « .5 0 » en « .50 », et les deux
+  boutons WhatsApp de l'accueil n'avaient plus d'icône ;
+- que tout lien interne mène à un fichier qui existe ;
 - que le `mailto` code les espaces en `%20` et non en `+` ;
 - que la page 404 emploie des chemins absolus ;
 - que toutes les ressources référencées existent ;
@@ -128,27 +167,50 @@ Onze tests, sans aucune dépendance (`node --test`). Ils vérifient :
   forme (toute suite de onze chiffres ou plus, hors téléphone public), jamais
   une valeur, afin de ne pas écrire lui-même ce qu'il interdit.
 
-Les tests ont été éprouvés dans les deux sens : quatre défauts réinjectés
-volontairement sont chacun rattrapés par le test correspondant.
+Les tests sont éprouvés **dans les deux sens** : neuf défauts réinjectés
+volontairement — dont le vert de marque, l'`og:image` repassée en SVG, une
+entrée retirée d'un seul menu, le lien de l'accueil cassé et l'espace perdu
+remis dans le tracé — sont chacun revus **nommément** par leur test.
 
-## Le cachet
+## Vérification au navigateur
 
-`assets/img/seal.svg` est le cachet officiel **redessiné en SVG** : net à toute
-taille, fond transparent, aucun fichier lourd. Deux différences assumées avec
-l'original : le texte du bas se lit à l'endroit plutôt qu'inversé, et la
-disposition des flèches est simplifiée. Pour une fidélité au pixel près, il
-faudrait le fichier vectoriel d'origine.
+Elle ne remplace pas les tests, elle voit ce qu'ils ne peuvent pas voir. Les
+deux pages sont ouvertes dans Chromium en **1358, 933 et 390 px** : aucune
+erreur JavaScript, aucun débordement horizontal, toutes les images chargent,
+et en anglais chaque texte est bien celui du catalogue.
 
-`assets/img/mark.svg` en est l'emblème seul, pour les petites tailles et l'icône
-d'onglet.
+Deux pièges du harnais, notés pour ne pas les repayer :
+
+1. **Les images `loading="lazy"` ne sont pas demandées tant qu'on n'a pas
+   déroulé.** Les compter sans dérouler les déclare toutes manquantes.
+   Et `networkidle` se déclenche AVANT que les requêtes ainsi réveillées ne
+   partent : il faut attendre chaque image, pas le silence du réseau.
+2. **La révélation au défilement met jusqu'à 970 ms** (420 ms de décalage plus
+   550 ms de transition). Une capture prise plus tôt montre une page à moitié
+   vide — et fait croire à une panne qui n'existe pas.
+
+## Les marques
+
+Loms n'a pas de version vectorielle de ses marques. Elles ont donc été
+**vectorisées par tracé de contours** depuis ses fichiers : classification des
+pixels par règles, filtre de majorité, suivi de frontière, puis simplification
+Ramer–Douglas–Peucker.
+
+| fichier | ce que c'est |
+|---|---|
+| `embleme-prodeli.svg` | l'emblème seul — 42 contours, 17 Ko. En-tête, icône d'onglet |
+| `cachet-prodeli.svg` | le cachet complet — 154 contours, 36 Ko. Bandeau d'accueil |
+| `schoolsafe-logo.png` | le logo réel de SchoolSafe, détouré par remplissage depuis les coins : seul le noir **relié au bord** devient transparent, les ombres intérieures survivent |
+| `schoolsafe.svg` | une **illustration** du portail QR — pas une capture d'écran, et le texte alternatif le dit |
+| `partage-prodeli.png` · `partage-schoolsafe.png` | les cartes de partage, 1200 × 630 |
 
 ### Le logo de la Fondation
 
-`assets/img/fondation-prodeli.svg` est le logo complet — losange vert, « DL »
-pour Denis Lomela, et le mot-symbole « Fondation PRODELI ».
-`assets/img/fondation-mark.svg` est le losange seul : c'est lui qui figure sur
-la carte du site, parce que le nom y est déjà le titre et que le lockup complet
-ferait doublon.
+`assets/img/fondation-mark.svg` est le losange seul — « DL » pour Denis Lomela.
+C'est lui qui figure sur la carte du site, parce que le nom y est déjà le titre
+et que le lockup complet ferait doublon. **La même règle vient d'être appliquée
+à SchoolSafe** : le logo grave déjà son nom, le titre de la section porte donc
+ce que le produit fait, pas son nom une seconde fois.
 
 Vert relevé sur le logo fourni : **`#009028`**. Le blanc dessus donne **3,89:1** —
 conforme uniquement en très grands caractères, ce qui est le cas du « DL ».
