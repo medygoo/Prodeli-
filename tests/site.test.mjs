@@ -222,8 +222,21 @@ test('les marques sont vectorielles, donc nettes à toute taille', () => {
     assert.ok(/viewBox="0 0 \d+ \d+"/.test(svg), `${f} n'a pas de viewBox : il ne se redimensionnera pas`);
     assert.ok(/fill="#[0-9a-f]{6}"/i.test(svg), `${f} n'a aucune couleur`);
   }
-  assert.ok(!/\.jpg"/.test(html.replace(/denis-lomela-ifangwa\.jpg/g, '')),
-    'une marque en JPG subsiste dans la page');
+  /* Deux rasters seulement, et chacun pour une raison qui ne peut pas
+     etre vectorisee : un PORTRAIT, et un RENDU EN RELIEF avec ses
+     ombres et sa lumiere. Tout le reste doit rester vectoriel — le
+     test echoue si un troisieme apparait. */
+  const RASTERS_ADMIS = ['denis-lomela-ifangwa.jpg', 'marque-relief.jpg'];
+  let reste = html;
+  for (const admis of RASTERS_ADMIS) reste = reste.split(admis).join('');
+  assert.ok(!/\.jpg"/.test(reste), 'une marque en JPG subsiste dans la page');
+  for (const admis of RASTERS_ADMIS) {
+    assert.ok(html.includes(admis), `raster declare admis mais absent : ${admis}`);
+    assert.ok(existsSync(join(racine, 'assets/img', admis)), `fichier absent : ${admis}`);
+  }
+  /* Le rendu en relief est LOURD : il doit etre servi en WebP d'abord. */
+  assert.ok(/<source srcset="\/assets\/img\/marque-relief\.webp" type="image\/webp">/.test(html),
+    'le rendu en relief doit avoir sa variante WebP en premier');
 });
 
 /* ══ La page SchoolSafe ═══════════════════════════════════════════════

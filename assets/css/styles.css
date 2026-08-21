@@ -325,7 +325,7 @@ section[id],[id="main"]{scroll-margin-top:96px}
    Le logo de SchoolSafe porte le mot « School » en BLANC : il ne tient
    que sur fond sombre. C'est ce qui décide du bandeau d'ouverture, pas
    un choix d'ambiance. */
-.ss-hero{padding:4.5rem 0 4rem}
+.ss-hero{position:relative;overflow:hidden;padding:4.5rem 0 5.5rem}
 .ss-hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
 .ss-hero h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.12;margin:0 0 1.1rem;letter-spacing:-.02em}
 .ss-logo{width:min(300px,80%);margin-inline:auto;filter:drop-shadow(0 26px 52px rgba(0,0,0,.5))}
@@ -433,3 +433,128 @@ body.loupe-ouverte{overflow:hidden}
 /* le numero de la carte quitte l'illustration : un chiffre pose sur un
    dessin brouille les deux */
 #cooperations .card-num{top:auto;bottom:.9rem;right:1.2rem}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RELIEF, PROFONDEUR ET MOUVEMENT
+   Tout ce qui suit est du DECOR. Trois regles le tiennent :
+     1. rien ne cache un contenu — le CSS ne masque jamais par defaut ;
+     2. rien ne descend sous le seuil de contraste — chaque couple est
+        mesure, y compris la teinte la plus CLAIRE d'un degrade ;
+     3. tout s'arrete en mouvement reduit, jusqu'a la derniere animation.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── le liseré de lecture ── */
+.progression{position:fixed;top:0;left:0;height:3px;width:100%;z-index:300;
+  transform:scaleX(var(--p,0));transform-origin:0 50%;
+  background:linear-gradient(90deg,#0A7A45,#2FA96C 55%,#4FD08C);
+  pointer-events:none}
+
+/* ── les titres en relief ───────────────────────────────────────────────
+   La couleur du TEXTE ne change pas : l'ombre ne se met que dessous.
+   Le contraste mesure reste donc celui du texte plein. */
+.hero h1{
+  text-shadow:
+    0 1px 0 #07301d, 0 2px 0 #062a19, 0 3px 0 #052416,
+    0 4px 0 #041e12, 0 5px 0 #03180e, 0 6px 0 #02120a,
+    0 7px 3px rgba(0,0,0,.45), 0 12px 18px rgba(0,0,0,.38),
+    0 22px 34px rgba(0,0,0,.28)}
+.ss-hero h1{
+  text-shadow:
+    0 1px 0 #14324a, 0 2px 0 #122c42, 0 3px 0 #10263a,
+    0 4px 0 #0e2032, 0 5px 0 #0c1a2a,
+    0 6px 2px rgba(0,0,0,.36), 0 12px 16px rgba(0,0,0,.30)}
+.section-heading h2{
+  text-shadow:0 1px 0 #cfd8d2, 0 2px 0 #c4cec8, 0 3px 1px rgba(16,24,19,.16),
+    0 6px 12px rgba(16,24,19,.10)}
+.section-encre .section-heading h2,.section-encre h2{
+  text-shadow:0 1px 0 #0a1410, 0 2px 0 #08110d, 0 4px 10px rgba(0,0,0,.45)}
+
+/* ── le bandeau : deux halos qui derivent lentement ── */
+.hero::after{content:"";position:absolute;z-index:0;pointer-events:none;
+  left:-14%;top:-34%;width:78%;height:150%;border-radius:50%;
+  background:radial-gradient(circle,rgba(10,122,69,.34),transparent 66%);
+  filter:blur(14px)}
+.anim .hero::after{animation:deriveA 26s ease-in-out infinite alternate}
+@keyframes deriveA{to{transform:translate3d(16%,10%,0) scale(1.14)}}
+.hero > .shell{z-index:1}
+
+/* ── la marque en relief ── */
+/* <figure> porte une marge de 40 px a gauche et a droite par DEFAUT
+   dans le navigateur. A 390 px elle poussait l'image 20 px hors du
+   cadre — une marge que personne n'avait ecrite. */
+.hero-marque{margin:0;position:relative;justify-self:center;width:min(360px,100%);
+  border-radius:18px;overflow:hidden;
+  box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.14),
+    inset 0 1px 0 rgba(255,255,255,.28)}
+.hero-marque img{display:block;width:100%;height:auto}
+.anim .hero-marque{animation:flotte 7s ease-in-out infinite alternate}
+@keyframes flotte{to{transform:translateY(-12px)}}
+
+/* ── les cartes prennent de l'epaisseur ── */
+.card,.principe{box-shadow:0 1px 2px rgba(16,24,19,.04),0 10px 24px rgba(16,24,19,.05)}
+.anim .card,.anim .principe{transition:transform .34s cubic-bezier(.22,.61,.36,1),
+  box-shadow .34s ease,border-color .34s ease}
+.anim .card:hover,.anim .principe:hover{transform:translateY(-7px);
+  box-shadow:0 6px 12px rgba(16,24,19,.07),0 26px 54px rgba(16,24,19,.15);
+  border-color:#BFD6C8}
+/* l'illustration respire avec sa carte */
+.objet-visuel{transform:scale(1);transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.anim .card:hover .objet-visuel{transform:scale(1.045)}
+
+/* ── les boutons : degrade, elevation, et un eclat qui passe ──────────
+   La teinte la plus CLAIRE du degrade est #0B8148 : blanc dessus 4,94:1.
+   Au-dela (#0C8A4E) on tombe a 4,41 et le bouton devient non conforme. */
+.button-primary{background:linear-gradient(135deg,#0B8148,#07683A);
+  position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(7,104,58,.34)}
+.button-primary:hover{background:linear-gradient(135deg,#0A7A45,#055830);
+  box-shadow:0 10px 26px rgba(7,104,58,.42)}
+.button-wa{background:linear-gradient(135deg,#0F7A6E,#0B665C);
+  box-shadow:0 6px 18px rgba(11,102,92,.34)}
+.anim .button{transition:background .22s ease,border-color .22s ease,
+  transform .16s ease,box-shadow .22s ease,color .22s ease}
+.anim .button:hover{transform:translateY(-2px)}
+.anim .button:active{transform:translateY(0)}
+.button-primary::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.30) 50%,transparent 62%);
+  transform:translateX(-130%)}
+.anim .button-primary:hover::after{animation:eclat .75s ease-out}
+@keyframes eclat{to{transform:translateX(130%)}}
+
+/* ── la navigation : un trait qui se trace ── */
+.primary-nav a::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:.28rem;
+  height:2px;border-radius:2px;background:currentColor;
+  transform:scaleX(0);transform-origin:0 50%;opacity:.85}
+.anim .primary-nav a::after{transition:transform .26s cubic-bezier(.22,.61,.36,1)}
+.anim .primary-nav a:hover::after,.anim .primary-nav a[aria-current]::after{transform:scaleX(1)}
+@media(max-width:1000px){.primary-nav a::after{display:none}}
+
+/* ── la couture ────────────────────────────────────────────────────────
+   Elle vit DANS le bandeau sombre, posee en bas, et y decoupe la couleur
+   de la section suivante. Placee entre les deux, elle etait blanche sur
+   fond blanc : invisible. */
+.couture{position:absolute;left:0;right:0;bottom:-1px;z-index:2;
+  display:block;width:100%;height:clamp(38px,5vw,72px);color:var(--blanc);
+  pointer-events:none}
+
+/* ── rien de tout cela en mouvement reduit ── */
+@media (prefers-reduced-motion:reduce){
+  .anim .hero::after,.anim .hero-marque{animation:none!important;transform:none!important}
+  .progression{display:none}
+}
+/* la parallaxe et l'inclinaison passent par des variables : le JS n'ecrit
+   jamais une transformation, il ecrit une VALEUR — la regle reste ici */
+.hero-marque{translate:0 var(--y,0)}
+.anim #objet .card,.anim #cooperations .card{
+  transform:perspective(900px) rotateX(var(--rx,0)) rotateY(var(--ry,0))}
+.anim #objet .card:hover,.anim #cooperations .card:hover{
+  transform:perspective(900px) rotateX(var(--rx,0)) rotateY(var(--ry,0)) translateY(-7px)}
+.hero-marques{display:grid;gap:1.6rem;justify-items:center}
+@media(max-width:900px){.hero-marques{order:-1}}
+
+/* ── la bande de marque ── */
+.bande-marque{padding:4.5rem 0}
+.marque-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:3.2rem;align-items:center}
+.marque-grid .hero-marque{width:100%;justify-self:start}
+.signature-titre{font-size:clamp(1.4rem,2.6vw,2.1rem);line-height:1.2;letter-spacing:-.01em;
+  margin:0 0 1rem}
+@media(max-width:900px){.marque-grid{grid-template-columns:1fr;gap:2rem}}

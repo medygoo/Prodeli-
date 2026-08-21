@@ -27,6 +27,7 @@
   <script type="module" src="/assets/js/main.js"></script>
 </head>
 <body class="entete-sombre">
+  <div class="progression" data-progression aria-hidden="true"></div>
   <a class="skip-link" href="#main" data-i18n="a11y.skip">Aller au contenu principal</a>
 
   <header class="site-header">
@@ -71,6 +72,9 @@
         </div>
         <img class="hero-seal" src="/assets/img/cachet-prodeli.svg" width="620" height="620" alt="Cachet officiel de PRODELI SARLU, République Démocratique du Congo" data-i18n-alt="hero.sealAlt">
       </div>
+      <svg class="couture" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M0 72V26c240 34 480 46 720 34S1200 6 1440 0v72Z" fill="currentColor"/>
+      </svg>
     </section>
 
     <section class="section" id="conviction">
@@ -209,6 +213,23 @@
         <article class="card objet-card"><img class="objet-visuel" src="/assets/img/domaines/technologies.svg" width="400" height="120" alt="Un bouclier abritant un réseau de nœuds" data-i18n-alt="objet.4Alt" loading="lazy"><h3 data-i18n="objet.4Title">Intelligence artificielle & cybersécurité</h3><p data-i18n="objet.4Text">Recherche, développement et exploitation de solutions d'intelligence artificielle, de robotique, de services numériques, de cybersécurité et de toute technologie émergente.</p></article>
         <article class="card objet-card"><img class="objet-visuel" src="/assets/img/domaines/social.svg" width="400" height="120" alt="Une école, une croix de santé et une personne" data-i18n-alt="objet.5Alt" loading="lazy"><h3 data-i18n="objet.5Title">Formation, santé & infrastructures sociales</h3><p data-i18n="objet.5Text">Modernisation agricole, gestion de centres de formation, de santé, de complexes scolaires et d'infrastructures sociales ; fourniture de kits d'installation alliant matériel et savoir-faire pour le développement communautaire.</p></article>
         <article class="card objet-card"><img class="objet-visuel" src="/assets/img/domaines/commerce.svg" width="400" height="120" alt="Un globe, deux flèches opposées et trois caisses" data-i18n-alt="objet.6Alt" loading="lazy"><h3 data-i18n="objet.6Title">Commerce & représentation</h3><p data-i18n="objet.6Text">Commerce général, prestations de services, représentation, importation et exportation de biens et services liés à l'objet social.</p></article>
+      </div>
+    </section>
+
+    <section class="section section-encre bande-marque" id="signature">
+      <div class="shell marque-grid">
+        <figure class="hero-marque" data-parallaxe="0.05">
+          <picture>
+            <source srcset="/assets/img/marque-relief.webp" type="image/webp">
+            <img src="/assets/img/marque-relief.jpg" width="880" height="722"
+                 alt="L’emblème de PRODELI SARLU en relief" data-i18n-alt="hero.reliefAlt" loading="lazy">
+          </picture>
+        </figure>
+        <div>
+          <p class="eyebrow" data-i18n="signature.kicker">La marque</p>
+          <h2 class="signature-titre" data-i18n="signature.title">Concevoir · Développer · Investir · Exploiter</h2>
+          <p class="lead" data-i18n="signature.text">Trois tours qui s’élèvent, un élan, et une volée de flèches qui part vers le haut : l’emblème dit ce que la société fait. On bâtit dans le temps, et de là partent des projets.</p>
+        </div>
       </div>
     </section>
 

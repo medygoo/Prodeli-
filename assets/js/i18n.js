@@ -215,6 +215,10 @@ export const translations = {
     'partnerships.1Alt': "Une main ouverte, une pousse et une pile de pi\u00e8ces",
     'partnerships.2Alt': "Un plan remis, et valid\u00e9",
     'partnerships.3Alt': "Un globe et un jalon pos\u00e9 sur le terrain",
+    'hero.reliefAlt': "L\u2019embl\u00e8me de PRODELI SARLU en relief",
+    'signature.kicker': "La marque",
+    'signature.title': "Concevoir \u00b7 D\u00e9velopper \u00b7 Investir \u00b7 Exploiter",
+    'signature.text': "Trois tours qui s\u2019\u00e9l\u00e8vent, un \u00e9lan, et une vol\u00e9e de fl\u00e8ches qui part vers le haut : l\u2019embl\u00e8me dit ce que la soci\u00e9t\u00e9 fait. On b\u00e2tit dans le temps, et de l\u00e0 partent des projets.",
     'footer.tagline': "Concevoir aujourd'hui les projets durables de demain.",
     'footer.rights': 'Tous droits réservés.',
     'footer.country': 'Kinshasa, République Démocratique du Congo'
@@ -433,6 +437,10 @@ export const translations = {
     'partnerships.1Alt': "An open hand, a seedling and a stack of coins",
     'partnerships.2Alt': "A plan handed over, and approved",
     'partnerships.3Alt': "A globe and a marker planted on the ground",
+    'hero.reliefAlt': 'The PRODELI SARLU emblem in relief',
+    'signature.kicker': "The mark",
+    'signature.title': "Design \u00b7 Develop \u00b7 Invest \u00b7 Operate",
+    'signature.text': "Three towers rising, a surge, and a flight of arrows heading upward: the emblem says what the company does. We build to last, and from there projects take off.",
     'footer.tagline': 'Designing today the lasting projects of tomorrow.',
     'footer.rights': 'All rights reserved.',
     'footer.country': 'Kinshasa, Democratic Republic of the Congo'

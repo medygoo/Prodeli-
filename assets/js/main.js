@@ -226,9 +226,65 @@ function initLoupe() {
   });
 }
 
+/* ══════════════════════════════════════════════════════════════
+   LE LISERE DE LECTURE ET LA PARALLAXE
+   Deux effets, un seul ecouteur de defilement, et tout passe par
+   requestAnimationFrame : sur un telephone modeste de Kinshasa, un
+   ecouteur qui calcule a chaque pixel coute plus cher que l'effet
+   ne rapporte.
+   Rien ici ne s'execute si le visiteur demande moins d'animation.
+   ══════════════════════════════════════════════════════════════ */
+function initRelief() {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const liseré = document.querySelector('[data-progression]');
+  const flottants = [...document.querySelectorAll('[data-parallaxe]')];
+  if (!liseré && !flottants.length) return;
+
+  let enCours = false;
+  const maj = () => {
+    enCours = false;
+    if (liseré) {
+      const course = document.documentElement.scrollHeight - window.innerHeight;
+      const p = course > 0 ? Math.min(1, window.scrollY / course) : 0;
+      liseré.style.setProperty('--p', String(p));
+    }
+    for (const noeud of flottants) {
+      const force = parseFloat(noeud.dataset.parallaxe) || 0;
+      noeud.style.setProperty('--y', `${(window.scrollY * force).toFixed(1)}px`);
+    }
+  };
+  window.addEventListener('scroll', () => {
+    if (enCours) return;
+    enCours = true;
+    window.requestAnimationFrame(maj);
+  }, { passive: true });
+  maj();
+
+  /* Les cartes suivent le pointeur, tres legerement. Au doigt on ne
+     fait rien : un survol qui reste colle apres le tap est pire que
+     pas d'effet du tout. */
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  for (const carte of document.querySelectorAll('#objet .card, #cooperations .card')) {
+    carte.addEventListener('pointermove', (evt) => {
+      const r = carte.getBoundingClientRect();
+      const x = (evt.clientX - r.left) / r.width - 0.5;
+      const y = (evt.clientY - r.top) / r.height - 0.5;
+      carte.style.setProperty('--rx', `${(-y * 4).toFixed(2)}deg`);
+      carte.style.setProperty('--ry', `${(x * 5).toFixed(2)}deg`);
+    });
+    carte.addEventListener('pointerleave', () => {
+      carte.style.removeProperty('--rx');
+      carte.style.removeProperty('--ry');
+    });
+  }
+}
+
 initLanguage();
 initNavigation();
 initMouvement();
 initYear();
 initContactForm(document.querySelector('#contact-form'));
 initLoupe();
+initRelief();
