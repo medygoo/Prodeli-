@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 430" role="img" aria-label="Illustration de l'application SchoolSafe : le portail scolaire par QR">
+  <defs>
+    <clipPath id="ecran"><rect x="26" y="26" width="248" height="378" rx="22"/></clipPath>
+  </defs>
+  <!-- le châssis -->
+  <rect x="14" y="14" width="272" height="402" rx="34" fill="#0B1226"/>
+  <rect x="20" y="20" width="260" height="390" rx="28" fill="#16204A"/>
+  <g clip-path="url(#ecran)">
+    <rect x="26" y="26" width="248" height="378" fill="#0B1226"/>
+    <!-- bandeau -->
+    <rect x="26" y="26" width="248" height="58" fill="#1E4FCB"/>
+    <rect x="42" y="46" width="18" height="18" rx="3" fill="none" stroke="#fff" stroke-width="2"/>
+    <rect x="47" y="51" width="8" height="8" fill="#fff"/>
+    <rect x="70" y="48" width="86" height="7" rx="3.5" fill="#fff" opacity=".95"/>
+    <rect x="70" y="60" width="56" height="5" rx="2.5" fill="#A9BCEB"/>
+    <circle cx="248" cy="55" r="9" fill="#F5B21B"/>
+    <!-- le viseur -->
+    <rect x="26" y="84" width="248" height="176" fill="#060B18"/>
+    <g stroke="#F5B21B" stroke-width="4" fill="none" stroke-linecap="square">
+      <path d="M78 128v-18h18"/><path d="M204 110h18v18"/>
+      <path d="M222 216v18h-18"/><path d="M96 234H78v-18"/>
+    </g>
+    <rect x="78" y="168" width="144" height="2.5" fill="#F5B21B" opacity=".9"/>
+    <rect x="78" y="164" width="144" height="10" fill="#F5B21B" opacity=".18"/>
+    <!-- la carte de résultat -->
+    <rect x="42" y="278" width="216" height="108" rx="14" fill="#141C31"/>
+    <rect x="42" y="278" width="216" height="4" rx="2" fill="#0FA35C"/>
+    <rect x="58" y="298" width="40" height="40" rx="10" fill="#1E4FCB" opacity=".28"/>
+    <path d="M78 310a7 7 0 1 1 0 14 7 7 0 0 1 0-14z" fill="#8FA9F0"/>
+    <path d="M64 336c0-7 6-11 14-11s14 4 14 11z" fill="#8FA9F0"/>
+    <rect x="110" y="302" width="106" height="8" rx="4" fill="#EAEEF8"/>
+    <rect x="110" y="317" width="72" height="6" rx="3" fill="#7B879F"/>
+    <rect x="110" y="331" width="88" height="14" rx="7" fill="#0FA35C" opacity=".22"/>
+    <path d="m117 338 3.4 3.4 6.6-6.8" stroke="#3FC98A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="132" y="335" width="52" height="6" rx="3" fill="#3FC98A"/>
+    <rect x="58" y="356" width="184" height="16" rx="8" fill="#F5B21B"/>
+  </g>
+  <rect x="112" y="20" width="76" height="16" rx="8" fill="#0B1226"/>
+</svg>

@@ -289,3 +289,16 @@ section[id],[id="main"]{scroll-margin-top:96px}
   border-radius:12px;background:var(--vert-pale);color:var(--vert-fonce);margin-bottom:.9rem}
 .objet-ic svg{width:24px;height:24px}
 .objet-card{padding-left:1.4rem}
+
+/* ── illustration du projet ── */
+.projet-visuel{display:flex;flex-direction:column;align-items:flex-start;gap:1.4rem}
+.projet-visuel img{width:min(260px,72%);height:auto;filter:drop-shadow(0 22px 44px rgba(0,0,0,.42))}
+@media(max-width:900px){.projet-visuel{align-items:center;text-align:center}.projet-visuel img{width:min(220px,60%)}}
+
+/* ── icônes des coopérations ── */
+.coop-ic{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;
+  background:var(--vert);color:#fff;margin-bottom:1rem}
+.coop-ic svg{width:24px;height:24px}
+.card .card-num{position:absolute;top:1.2rem;right:1.4rem;width:auto;height:auto;background:none;
+  color:var(--filet);font-size:1.5rem;font-weight:800;margin:0}
+.grid-3 .card{position:relative}
