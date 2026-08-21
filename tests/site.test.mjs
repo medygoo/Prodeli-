@@ -427,3 +427,24 @@ test('aucune image ne porte un src VIDE', () => {
     assert.ok(!/<(?:script|img|source)[^>]*\ssrcset=""/.test(source), `${fichier} : srcset vide`);
   }
 });
+
+test('la parallaxe ne dépend jamais du défilement absolu de la page', () => {
+  /* Loms, sur téléphone : « deux logos se compilent, ça empêche l'autre
+     d'être visible ». La cause : `window.scrollY * force` grandit sans
+     fin — en bas d'une longue page (8000 px de défilement), un
+     coefficient de 0,05 déplaçait déjà une image de 438 px, assez pour
+     la faire glisser hors de sa section et recouvrir le logo suivant.
+     Le calcul doit se fonder sur la position de l'ÉLÉMENT à l'écran
+     (`getBoundingClientRect`), jamais sur `window.scrollY` seul — et le
+     résultat doit être borné, pour qu'aucun coefficient mal réglé ne
+     puisse reproduire la même panne. */
+  const js = lire('assets/js/main.js');
+  const debut = js.indexOf('for (const noeud of flottants)');
+  const bloc = js.slice(debut, js.indexOf("window.addEventListener('scroll'", debut));
+  assert.ok(bloc.includes('getBoundingClientRect'),
+    'le décalage doit se calculer depuis la position réelle de l’élément à l’écran');
+  assert.ok(!/window\.scrollY\s*\*\s*force/.test(bloc),
+    'le décalage ne doit plus être proportionnel au défilement absolu — c’est exactement ce qui a fait glisser un logo sur l’autre');
+  assert.ok(/Math\.max\(-?\d+,\s*Math\.min\(\d+,/.test(bloc),
+    'le décalage doit être borné, quel que soit le coefficient déclaré dans data-parallaxe');
+});

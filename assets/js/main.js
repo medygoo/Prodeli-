@@ -251,8 +251,19 @@ function initRelief() {
       liseré.style.setProperty('--p', String(p));
     }
     for (const noeud of flottants) {
+      /* Le decalage suit la position de l'ELEMENT dans l'ecran, jamais le
+         defilement absolu de la page. scrollY multiplie par un coefficient grandit
+         sans fin : en bas d'une longue page (8000 px de defilement), un
+         coefficient de 0,05 deplacait deja l'image de 438 px — assez pour
+         la faire glisser hors de sa section et recouvrir le logo suivant.
+         C'est exactement ce que Loms a vu sur telephone : deux logos
+         qui se superposent. Recentre sur l'ecran et borne, l'effet reste
+         discret quelle que soit la longueur de la page. */
       const force = parseFloat(noeud.dataset.parallaxe) || 0;
-      noeud.style.setProperty('--y', `${(window.scrollY * force).toFixed(1)}px`);
+      const r = noeud.getBoundingClientRect();
+      const ecart = r.top + r.height / 2 - window.innerHeight / 2;
+      const decalage = Math.max(-40, Math.min(40, -ecart * force));
+      noeud.style.setProperty('--y', `${decalage.toFixed(1)}px`);
     }
   };
   window.addEventListener('scroll', () => {
