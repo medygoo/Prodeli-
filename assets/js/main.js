@@ -167,8 +167,68 @@ function initMouvement() {
   }
 }
 
+/* ══════════════════════════════════════════════════════════════
+   LA LOUPE — agrandir le portrait
+   Le declencheur est un VRAI LIEN vers le fichier image. Sans ce
+   script, il ouvre la photo en grand dans le navigateur : le geste
+   marche quand meme. Un controle qui ne ferait rien sans JavaScript
+   serait un bouton muet, et c'est toujours un defaut.
+   Rien n'est fabrique ici : la vue agrandie est ecrite dans le HTML.
+   ══════════════════════════════════════════════════════════════ */
+function initLoupe() {
+  const loupe = document.querySelector('#loupe');
+  const image = loupe && loupe.querySelector('[data-loupe-image]');
+  const legende = loupe && loupe.querySelector('[data-loupe-legende]');
+  const fermer = loupe && loupe.querySelector('[data-loupe-fermer]');
+  const declencheurs = document.querySelectorAll('[data-agrandir]');
+  if (!loupe || !image || !legende || !fermer || !declencheurs.length) return;
+
+  let origine = null;   /* a qui rendre le focus en refermant */
+
+  const ouvrir = (lien) => {
+    const source = lien.querySelector('img');
+    if (!source) return;
+    origine = lien;
+    image.src = source.currentSrc || source.src;
+    image.alt = source.alt;
+    legende.textContent = lien.dataset.legende || '';
+    legende.hidden = !legende.textContent;
+    loupe.hidden = false;
+    document.body.classList.add('loupe-ouverte');
+    /* le cadrage serre de la vignette ne vaut que pour la vignette */
+    fermer.focus();
+  };
+
+  const refermer = () => {
+    if (loupe.hidden) return;
+    loupe.hidden = true;
+    document.body.classList.remove('loupe-ouverte');
+    if (origine) origine.focus();
+    origine = null;
+  };
+
+  declencheurs.forEach((lien) => {
+    lien.addEventListener('click', (evt) => {
+      /* on laisse passer l'ouverture dans un nouvel onglet */
+      if (evt.metaKey || evt.ctrlKey || evt.shiftKey || evt.button !== 0) return;
+      evt.preventDefault();
+      ouvrir(lien);
+    });
+  });
+
+  fermer.addEventListener('click', refermer);
+  /* le fond referme, l'image non */
+  loupe.addEventListener('click', (evt) => { if (evt.target === loupe) refermer(); });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') refermer();
+    /* tant que la vue est ouverte, la tabulation ne sort pas du bouton */
+    if (evt.key === 'Tab' && !loupe.hidden) { evt.preventDefault(); fermer.focus(); }
+  });
+}
+
 initLanguage();
 initNavigation();
 initMouvement();
 initYear();
 initContactForm(document.querySelector('#contact-form'));
+initLoupe();

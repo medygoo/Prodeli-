@@ -202,6 +202,9 @@ export const translations = {
     'ss.r6d': "Ses enfants : présences, devoirs, frais, reçus, messages.",
     'ss.ctaTitle': "Votre école, l’année prochaine.",
     'ss.ctaText': "SchoolSafe est en développement, avec un premier déploiement en cours à Kinshasa dans un complexe scolaire du primaire et de la maternelle. Si vous dirigez un établissement, parlons-en.",
+    'loupe.agrandir': 'Agrandir le portrait de Denis Lomela Ifangwa',
+    'loupe.titre': 'Portrait agrandi',
+    'loupe.fermer': 'Fermer la vue agrandie',
     'footer.tagline': "Concevoir aujourd'hui les projets durables de demain.",
     'footer.rights': 'Tous droits réservés.',
     'footer.country': 'Kinshasa, République Démocratique du Congo'
@@ -407,6 +410,9 @@ export const translations = {
     'ss.r6d': "Their children: attendance, homework, fees, receipts, messages.",
     'ss.ctaTitle': "Your school, next year.",
     'ss.ctaText': "SchoolSafe is under development, with a first deployment under way in Kinshasa at a nursery and primary school complex. If you run a school, let us talk.",
+    'loupe.agrandir': 'Enlarge the portrait of Denis Lomela Ifangwa',
+    'loupe.titre': 'Enlarged portrait',
+    'loupe.fermer': 'Close the enlarged view',
     'footer.tagline': 'Designing today the lasting projects of tomorrow.',
     'footer.rights': 'All rights reserved.',
     'footer.country': 'Kinshasa, Democratic Republic of the Congo'

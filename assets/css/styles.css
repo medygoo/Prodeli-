@@ -328,3 +328,43 @@ section[id],[id="main"]{scroll-margin-top:96px}
    Projets — le mot « School » y est blanc, il ne tient pas sur clair. */
 .ss-marque{width:104px;height:auto;margin:0 0 1.1rem}
 @media(max-width:900px){.ss-marque{width:88px}}
+
+/* ── La loupe : agrandir le portrait ──────────────────────────────────
+   Le declencheur est un lien vers le fichier image. Sans JavaScript il
+   ouvre la photo en grand : le geste marche quand meme. */
+.lig-loupe{position:relative;display:block;flex:none;line-height:0;
+  border-radius:var(--r-s);text-decoration:none}
+.lig-loupe .lig-photo{transition:border-color .25s ease,filter .25s ease}
+.lig-loupe:hover .lig-photo,.lig-loupe:focus-visible .lig-photo{
+  border-color:var(--vert);filter:saturate(1)}
+.lig-loupe-ic{position:absolute;right:-6px;bottom:-6px;width:26px;height:26px;
+  border-radius:50%;background:var(--vert);border:2px solid var(--blanc);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(16,24,19,.3)}
+.lig-loupe-ic svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2.4;
+  stroke-linecap:round}
+@media(max-width:640px){.lig-loupe-ic{width:23px;height:23px}.lig-loupe-ic svg{width:12px;height:12px}}
+
+.loupe{position:fixed;inset:0;z-index:400;display:flex;align-items:center;
+  justify-content:center;padding:clamp(1rem,4vw,2.5rem);
+  background:rgba(8,14,10,.95);overscroll-behavior:contain}
+.loupe[hidden]{display:none}
+body.loupe-ouverte{overflow:hidden}
+.loupe-cadre{margin:0;display:flex;flex-direction:column;align-items:center;
+  gap:1rem;max-height:100%}
+.loupe-cadre img{max-width:min(100%,640px);max-height:78vh;width:auto;height:auto;
+  border-radius:var(--r);box-shadow:0 30px 70px rgba(0,0,0,.6)}
+/* #E4EBE6 sur le fond de la loupe : 14,57:1 — mesure sur le PIRE cas,
+   le voile a 95 % pose sur une page entierement blanche (#141a16) */
+.loupe-cadre figcaption{margin:0;color:#E4EBE6;font-size:.92rem;text-align:center;
+  text-wrap:balance}
+.loupe-fermer{position:absolute;top:clamp(.75rem,3vw,1.5rem);right:clamp(.75rem,3vw,1.5rem);
+  width:48px;height:48px;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.42);
+  display:flex;align-items:center;justify-content:center}
+.loupe-fermer svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2.2;
+  stroke-linecap:round}
+.loupe-fermer:hover{background:rgba(255,255,255,.24)}
+.anim .loupe-cadre{animation:loupeArrivee .28s cubic-bezier(.22,.61,.36,1)}
+@keyframes loupeArrivee{from{opacity:0;transform:scale(.97)}}
+@media print{.loupe{display:none}}

@@ -368,3 +368,43 @@ test('chaque tracé SVG se parse — une icône cassée disparaît en silence', 
   }
   assert.ok(traces >= 20, `seulement ${traces} tracés inspectés — le test ne vérifie presque rien`);
 });
+
+test('agrandir le portrait marche AUSSI sans JavaScript', () => {
+  /* Le declencheur doit etre un vrai lien vers le fichier image : sans
+     script, il ouvre la photo en grand dans le navigateur. Un bouton qui
+     ne ferait rien sans JavaScript serait un controle muet — la faute que
+     ce projet traque partout ailleurs. */
+  const lien = html.match(/<a class="lig-loupe"[\s\S]{0,900}?<\/a>/);
+  assert.ok(lien, 'le portrait n’est pas agrandissable');
+  const href = (lien[0].match(/href="([^"]+)"/) || [])[1];
+  assert.ok(href, 'le declencheur n’a pas de href — il ne ferait rien sans script');
+  assert.ok(existsSync(join(racine, href)), `le lien mene a un fichier absent : ${href}`);
+  assert.ok(/<img[^>]*class="lig-photo"/.test(lien[0]), 'le lien ne contient pas la vignette');
+  assert.ok(/aria-label="[^"]+"/.test(lien[0]), 'un lien dont le contenu est une image a besoin d’un intitule');
+
+  /* La vue agrandie vit dans le HTML : rien n'est fabrique a l'execution. */
+  assert.ok(/<div class="loupe" id="loupe"[^>]*hidden>/.test(html),
+    'la vue agrandie doit exister dans la page, masquee');
+  for (const marque of ['data-loupe-image', 'data-loupe-legende', 'data-loupe-fermer']) {
+    assert.ok(html.includes(marque), `repere absent de la vue agrandie : ${marque}`);
+  }
+  const js = lire('assets/js/main.js');
+  assert.ok(!js.includes('createElement'), 'la vue agrandie ne doit pas etre fabriquee en JavaScript');
+
+  /* [hidden] doit vraiment cacher : .loupe est en display:flex, et une
+     regle d'affichage l'emporte sur l'attribut si on ne la neutralise pas. */
+  const css = lire('assets/css/styles.css');
+  assert.ok(css.includes('.loupe[hidden]{display:none}'),
+    'sans cette regle, la vue agrandie couvrirait la page en permanence');
+});
+
+test('aucune image ne porte un src VIDE', () => {
+  /* `src=""` ne veut pas dire « pas de source » : il se resout en
+     l'adresse de la PAGE. Le navigateur telecharge donc le HTML une
+     seconde fois pour tenter de l'afficher comme une image, et echoue.
+     Trouve sur la vue agrandie, ou le src etait rempli par le script. */
+  for (const [fichier, source] of Object.entries(pages)) {
+    assert.ok(!/<img[^>]*\ssrc=""/.test(source), `${fichier} : une image porte src=""`);
+    assert.ok(!/<(?:script|img|source)[^>]*\ssrcset=""/.test(source), `${fichier} : srcset vide`);
+  }
+});
