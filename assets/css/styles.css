@@ -558,3 +558,24 @@ body.loupe-ouverte{overflow:hidden}
 .signature-titre{font-size:clamp(1.4rem,2.6vw,2.1rem);line-height:1.2;letter-spacing:-.01em;
   margin:0 0 1rem}
 @media(max-width:900px){.marque-grid{grid-template-columns:1fr;gap:2rem}}
+
+/* ── nos espaces : trois provisoires, a remplacer ────────────────────
+   Le badge et la legende disent honnetement ce que c'est : un apercu,
+   pas une photographie de l'entreprise. Ne rien afficher de faux vaut
+   mieux qu'afficher une photo qu'on ne peut pas garantir. */
+.espaces-grid{gap:1.4rem}
+.espace-carte{position:relative;margin:0;border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--filet);box-shadow:0 1px 2px rgba(16,24,19,.04),0 10px 24px rgba(16,24,19,.05)}
+.anim .espace-carte{transition:transform .34s cubic-bezier(.22,.61,.36,1),box-shadow .34s ease}
+.anim .espace-carte:hover{transform:translateY(-6px);box-shadow:0 6px 12px rgba(16,24,19,.07),0 26px 54px rgba(16,24,19,.15)}
+.espace-carte picture,.espace-carte img{display:block;width:100%;height:220px;object-fit:cover}
+.anim .espace-carte img{transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.anim .espace-carte:hover img{transform:scale(1.045)}
+.espace-carte::before{content:"Aperçu";position:absolute;top:.7rem;left:.7rem;z-index:1;
+  padding:.3rem .6rem;border-radius:999px;font-size:.68rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:#fff;
+  background:rgba(16,24,19,.62);backdrop-filter:blur(4px)}
+html[lang="en"] .espace-carte::before{content:"Preview"}
+.espace-carte figcaption{padding:.85rem 1rem;font-size:.86rem;font-weight:700;color:var(--encre);
+  background:#fff}
+@media(max-width:900px){.espace-carte img{height:200px}}

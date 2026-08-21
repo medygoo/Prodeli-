@@ -204,7 +204,31 @@ Ramer–Douglas–Peucker.
 | `schoolsafe.svg` | une **illustration** du portail QR — pas une capture d'écran, et le texte alternatif le dit |
 | `partage-prodeli.png` · `partage-schoolsafe.png` | les cartes de partage, 1200 × 630 |
 | `motif-envol.svg` | la volée de flèches de l'emblème, fond du bandeau d'ouverture |
+| `bureau/*-placeholder.{webp,jpg}` | **PROVISOIRE** — trois rendus 3D fournis par Loms, en attendant de vraies photographies |
 | `domaines/*.svg` · `cooperations/*.svg` | neuf illustrations, un seul vocabulaire |
+
+### Trois photos provisoires — à remplacer dès que possible
+
+Section « Nos espaces » sur l'accueil (`#espaces`). Ce sont des **rendus 3D**
+fournis par Loms le 21 août 2026, pas des photographies du bureau réel de
+Kambabare 4367 — le badge « Aperçu / Preview » posé sur chaque image le dit
+sans ambiguïté, et le test des marques vectorielles (`tests/site.test.mjs`)
+les déclare nommément comme la seule exception admise à côté du portrait
+et du logo en relief.
+
+**Pour remplacer par de vraies photos**, un seul geste suffit : écraser les
+six fichiers avec les mêmes noms —
+
+```
+assets/img/bureau/accueil-placeholder.{webp,jpg}
+assets/img/bureau/direction-placeholder.{webp,jpg}
+assets/img/bureau/bureau-placeholder.{webp,jpg}
+```
+
+Rien d'autre à toucher dans `index.html`. Une fois de vraies photos en
+place, retirer le badge « Aperçu » (`.espace-carte::before` dans
+`assets/css/styles.css`) et mettre à jour `espaces.title` / `espaces.intro`
+dans `assets/js/i18n.js`, qui annoncent encore l'attente.
 
 ### Les illustrations se REGÉNÈRENT, elles ne se retouchent pas
 

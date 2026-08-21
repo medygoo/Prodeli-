@@ -226,7 +226,13 @@ test('les marques sont vectorielles, donc nettes à toute taille', () => {
      etre vectorisee : un PORTRAIT, et un RENDU EN RELIEF avec ses
      ombres et sa lumiere. Tout le reste doit rester vectoriel — le
      test echoue si un troisieme apparait. */
-  const RASTERS_ADMIS = ['denis-lomela-ifangwa.jpg', 'marque-relief.jpg'];
+  const RASTERS_ADMIS = [
+    'denis-lomela-ifangwa.jpg', 'marque-relief.jpg',
+    /* Trois PLACEHOLDERS provisoires (photos de bureau, en attendant
+       les vraies). Une photographie ne se vectorise pas davantage
+       qu'un portrait — la raison est la même. */
+    'bureau/accueil-placeholder.jpg', 'bureau/direction-placeholder.jpg', 'bureau/bureau-placeholder.jpg',
+  ];
   let reste = html;
   for (const admis of RASTERS_ADMIS) reste = reste.split(admis).join('');
   assert.ok(!/\.jpg"/.test(reste), 'une marque en JPG subsiste dans la page');
