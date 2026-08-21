@@ -212,6 +212,9 @@ export const translations = {
     'objet.5Alt': "Une \u00e9cole, une croix de sant\u00e9 et une personne",
     'objet.6Alt': "Un globe, deux fl\u00e8ches oppos\u00e9es et trois caisses",
     'contact.plan': 'Ouvrir dans une application de cartes',
+    'partnerships.1Alt': "Une main ouverte, une pousse et une pile de pi\u00e8ces",
+    'partnerships.2Alt': "Un plan remis, et valid\u00e9",
+    'partnerships.3Alt': "Un globe et un jalon pos\u00e9 sur le terrain",
     'footer.tagline': "Concevoir aujourd'hui les projets durables de demain.",
     'footer.rights': 'Tous droits réservés.',
     'footer.country': 'Kinshasa, République Démocratique du Congo'
@@ -427,6 +430,9 @@ export const translations = {
     'objet.5Alt': "A school, a health cross and a person",
     'objet.6Alt': "A globe, two opposing arrows and three crates",
     'contact.plan': 'Open in a maps application',
+    'partnerships.1Alt': "An open hand, a seedling and a stack of coins",
+    'partnerships.2Alt': "A plan handed over, and approved",
+    'partnerships.3Alt': "A globe and a marker planted on the ground",
     'footer.tagline': 'Designing today the lasting projects of tomorrow.',
     'footer.rights': 'All rights reserved.',
     'footer.country': 'Kinshasa, Democratic Republic of the Congo'

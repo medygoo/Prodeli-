@@ -203,6 +203,28 @@ Ramer–Douglas–Peucker.
 | `schoolsafe-logo.png` | le logo réel de SchoolSafe, détouré par remplissage depuis les coins : seul le noir **relié au bord** devient transparent, les ombres intérieures survivent |
 | `schoolsafe.svg` | une **illustration** du portail QR — pas une capture d'écran, et le texte alternatif le dit |
 | `partage-prodeli.png` · `partage-schoolsafe.png` | les cartes de partage, 1200 × 630 |
+| `motif-envol.svg` | la volée de flèches de l'emblème, fond du bandeau d'ouverture |
+| `domaines/*.svg` · `cooperations/*.svg` | neuf illustrations, un seul vocabulaire |
+
+### Les illustrations se REGÉNÈRENT, elles ne se retouchent pas
+
+```bash
+node tools/dessiner-domaines.mjs       # les six domaines de l'article 4
+node tools/dessiner-cooperations.mjs   # les trois formes de coopération
+node tools/dessiner-motif.mjs          # la volée de flèches du bandeau
+```
+
+Un seul vocabulaire : même cadre 400 × 120, même trait, même palette.
+Six dessins qui se ressemblent forment un système ; six styles différents
+donnent l'impression d'assemblé — c'est la leçon déjà payée sur les icônes.
+
+Le motif du bandeau vient de **l'emblème lui-même** : il montre trois tours,
+un élan rouge et une volée de flèches. C'est cette volée qui est reprise.
+Sa graine est **fixe** — sinon le motif changerait en silence à chaque
+passage et personne ne saurait pourquoi.
+
+Ce sont des **illustrations**, et chaque texte alternatif le dit. Aucune
+n'est présentée comme une photographie de la société.
 
 ### Le logo de la Fondation
 

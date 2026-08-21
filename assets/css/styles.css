@@ -73,12 +73,32 @@ h3{font-size:1.05rem;line-height:1.35;font-weight:700}
 .section-heading p:not(.eyebrow){color:var(--gris);margin:.9rem 0 0}
 
 /* ── hero ── */
-.hero{padding:4.5rem 0 4rem;background:linear-gradient(180deg,var(--creme),#fff)}
+/* Le bandeau d'ouverture. Trois couches, dans cet ordre :
+   la volee de fleches de l'embleme, deux halos, puis le fond profond.
+   Le cachet est une encre SOMBRE sans fond : sur un ciel sombre il
+   disparaitrait. Il est donc pose sur un disque creme — c'est d'ailleurs
+   ainsi qu'un cachet existe dans la vraie vie, sur du papier. */
+.hero{position:relative;overflow:hidden;padding:5rem 0 4.5rem;
+  background:
+    radial-gradient(760px 520px at 18% 12%, rgba(10,122,69,.30), transparent 62%),
+    radial-gradient(620px 480px at 92% 88%, rgba(198,55,45,.16), transparent 60%),
+    linear-gradient(165deg,#0d1f16 0%,#101813 55%,#14211a 100%)}
+.hero::before{content:"";position:absolute;inset:0;
+  background:url("/assets/img/motif-envol.svg") center/cover no-repeat;
+  opacity:.5;pointer-events:none}
+.hero > .shell{position:relative}
+.hero .eyebrow{color:#7FD9A8}
+.hero h1{color:#fff}
+.hero .lead{color:#C7D4CC}
+.hero .button-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,.38)}
+.hero .button-secondary:hover{border-color:#fff;color:#fff}
 .hero-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:3.5rem;align-items:center}
 .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
-.hero-seal{justify-self:center;width:min(300px,100%);border-radius:50%}
-.hero-quote{border-left:3px solid var(--vert);padding:.2rem 0 .2rem 1.2rem;margin:1.8rem 0 0;font-size:1.02rem;color:var(--encre);font-style:normal}
-.hero-quote cite{display:block;margin-top:.6rem;font-size:.78rem;font-style:normal;color:var(--gris);letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.hero-seal{justify-self:center;width:min(310px,100%);border-radius:50%;
+  background:radial-gradient(circle at 50% 44%, #FBFCFB 0 62%, #EFF3F0 100%);
+  padding:22px;box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.14)}
+.hero-quote{border-left:3px solid #2FA96C;padding:.2rem 0 .2rem 1.2rem;margin:1.8rem 0 0;font-size:1.02rem;color:#E7EEE9;font-style:normal}
+.hero-quote cite{display:block;margin-top:.6rem;font-size:.78rem;font-style:normal;color:#A9BBB1;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
 
 /* ── grilles ── */
 .grid{display:grid;gap:1.1rem}
@@ -297,10 +317,6 @@ section[id],[id="main"]{scroll-margin-top:96px}
 .projet-visuel img{width:min(260px,72%);height:auto;filter:drop-shadow(0 22px 44px rgba(0,0,0,.42))}
 @media(max-width:900px){.projet-visuel{align-items:center;text-align:center}.projet-visuel img{width:min(220px,60%)}}
 
-/* ── icônes des coopérations ── */
-.coop-ic{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;
-  background:var(--vert);color:#fff;margin-bottom:1rem}
-.coop-ic svg{width:24px;height:24px}
 .card .card-num{position:absolute;top:1.2rem;right:1.4rem;width:auto;height:auto;background:none;
   color:var(--filet);font-size:1.5rem;font-weight:800;margin:0}
 .grid-3 .card{position:relative}
@@ -379,5 +395,41 @@ body.loupe-ouverte{overflow:hidden}
   margin:0 0 1rem;display:block}
 #objet .objet-card{padding:1rem 1.1rem 1.2rem;border:1px solid var(--filet);
   border-radius:var(--r);background:#fff}
+#cooperations .card{padding:1rem 1.1rem 1.2rem}
 .contact-plan{margin:.35rem 0 0}
 .contact-plan a{font-size:.88rem;color:var(--vert-fonce);font-weight:600}
+
+/* ── l'en-tete par-dessus un bandeau sombre ───────────────────────────
+   Sur les deux pages, le premier bandeau est sombre. Une barre blanche
+   posee dessus coupe l'ouverture en deux ; transparente, le bandeau va
+   d'un bord a l'autre. Elle redevient blanche des qu'on a defile — le
+   script pose deja .detache pour cela.
+
+   Uniquement au-dessus de 1000 px : en dessous, la barre n'est plus
+   collante et le menu s'ouvre en panneau BLANC, qui exige une barre
+   blanche pour ne pas flotter dans le vide. */
+@media(min-width:1001px){
+  body.entete-sombre .site-header:not(.detache){
+    background:transparent;border-bottom-color:transparent;backdrop-filter:none}
+  /* L'embleme est une encre SOMBRE : sur un ciel sombre il disparait,
+     exactement comme le cachet. Il recoit donc sa propre pastille
+     claire — et il la perd des que la barre redevient blanche. */
+  body.entete-sombre .site-header:not(.detache) .brand img{
+    background:#F7F9F8;padding:5px 7px;border-radius:8px;
+    box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+  body.entete-sombre .site-header:not(.detache) .brand-copy strong{color:#fff}
+  body.entete-sombre .site-header:not(.detache) .brand-copy small{color:#B9C7BF}
+  body.entete-sombre .site-header:not(.detache) .primary-nav a{color:#D8E3DC}
+  body.entete-sombre .site-header:not(.detache) .primary-nav a:hover,
+  body.entete-sombre .site-header:not(.detache) .primary-nav a[aria-current]{
+    color:#fff;background:rgba(255,255,255,.14)}
+  body.entete-sombre .site-header:not(.detache) .language-switch{border-color:rgba(255,255,255,.34)}
+  body.entete-sombre .site-header:not(.detache) .language-switch button{color:#D8E3DC}
+  body.entete-sombre .site-header:not(.detache) .language-switch button.is-active{
+    background:var(--vert);color:#fff}
+  /* la barre est transparente : le bandeau commence SOUS elle */
+  body.entete-sombre .hero,body.entete-sombre .ss-hero{margin-top:-79px;padding-top:calc(5rem + 79px)}
+}
+/* le numero de la carte quitte l'illustration : un chiffre pose sur un
+   dessin brouille les deux */
+#cooperations .card-num{top:auto;bottom:.9rem;right:1.2rem}

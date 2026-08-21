@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" role="img" aria-hidden="true">
+  <defs><clipPath id="k3"><rect width="400" height="120" rx="10"/></clipPath></defs>
+  <g clip-path="url(#k3)">
+    <rect width="400" height="120" fill="#EAF4EE"/>
+    <path d="M0 96 Q100 74 200 88 T400 78 V120 H0Z" fill="#DCEBE2"/>
+    <circle cx="168" cy="60" r="28" fill="none" stroke="#0A7A45" stroke-width="3"/>
+    <path d="M140 60h56M168 32c10 11 10 45 0 56M168 32c-10 11-10 45 0 56" fill="none" stroke="#0A7A45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M246 92c0-10 12-14 12-26a12 12 0 1 0-24 0c0 12 12 16 12 26z" fill="none" stroke="#065C33" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="246" cy="66" r="5" fill="#C09018"/>
+    <path d="M204 46h26M204 56h18" fill="none" stroke="#065C33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+    <path d="M270 52h22M276 62h16" fill="none" stroke="#065C33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+    <path d="M132 100h152" fill="none" stroke="#065C33" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+  </g>
+</svg>
