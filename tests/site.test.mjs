@@ -99,7 +99,7 @@ test('parité FR / EN : mêmes clés, aucune vide', () => {
 
 test('toute clé employée dans la page existe, et aucune ne dort', () => {
   const employees = new Set(
-    [...html.matchAll(/data-i18n(?:-doc|-alt)?="([^"]+)"/g)].map((m) => m[1])
+    [...html.matchAll(/data-i18n(?:-doc|-alt|-label)?="([^"]+)"/g)].map((m) => m[1])
   );
   const catalogue = new Set(Object.keys(translations.fr));
   for (const cle of employees) assert.ok(catalogue.has(cle), `clé employée et absente du catalogue : ${cle}`);

@@ -259,3 +259,33 @@ section[id],[id="main"]{scroll-margin-top:96px}
   .language-switch{margin-left:0}
   .primary-nav{top:66px}
 }
+
+/* ══════════════════════════════════════════════════════════════
+   WHATSAPP — en RDC, c'est le canal qui répond. Il passe donc
+   AVANT le formulaire, pas après.
+   ══════════════════════════════════════════════════════════════ */
+.button-wa{background:#128C7E;border-color:#128C7E;color:#fff;gap:.6rem}
+.button-wa:hover{background:#0e6f64;border-color:#0e6f64}
+.button-wa svg{width:22px;height:22px;flex:none}
+.wa-note{margin:.7rem 0 0;font-size:.85rem;color:var(--gris)}
+
+.wa-flottant{position:fixed;right:18px;bottom:18px;z-index:200;display:flex;align-items:center;gap:.55rem;
+  height:56px;padding:0 20px 0 16px;border-radius:999px;background:#128C7E;color:#fff;
+  text-decoration:none;font-weight:700;font-size:.95rem;
+  box-shadow:0 8px 24px rgba(16,24,19,.28);border:2px solid #fff}
+.wa-flottant svg{width:26px;height:26px;flex:none}
+.wa-flottant:hover{background:#0e6f64}
+.anim .wa-flottant{transition:transform .2s ease,background .2s ease}
+.anim .wa-flottant:hover{transform:translateY(-2px)}
+@media(max-width:600px){
+  /* sur téléphone, la pastille seule : le pouce la trouve, elle ne masque rien */
+  .wa-flottant{padding:0;width:56px;justify-content:center;right:14px;bottom:14px}
+  .wa-flottant span{display:none}
+}
+@media print{.wa-flottant{display:none}}
+
+/* ── icônes des domaines ── */
+.objet-ic{display:flex;align-items:center;justify-content:center;width:44px;height:44px;
+  border-radius:12px;background:var(--vert-pale);color:var(--vert-fonce);margin-bottom:.9rem}
+.objet-ic svg{width:24px;height:24px}
+.objet-card{padding-left:1.4rem}

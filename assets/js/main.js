@@ -31,6 +31,14 @@ export function translatePage(language) {
     else node.setAttribute('content', value);
   });
 
+  /* aria-label : un bouton dont le seul contenu est une icône n'a pas de
+     texte à lire. Sans ça, la clé existerait dans le catalogue sans que
+     personne ne l'applique — un champ mort. */
+  document.querySelectorAll('[data-i18n-label]').forEach((node) => {
+    const value = t(node.dataset.i18nLabel);
+    if (value) node.setAttribute('aria-label', value);
+  });
+
   document.querySelectorAll('[data-i18n-alt]').forEach((node) => {
     const value = t(node.dataset.i18nAlt);
     if (value) node.setAttribute('alt', value);
