@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" role="img" aria-hidden="true">
+  <defs><clipPath id="c3"><rect width="400" height="120" rx="10"/></clipPath></defs>
+  <g clip-path="url(#c3)">
+    <rect width="400" height="120" fill="#EAF4EE"/>
+    <path d="M0 96 Q100 74 200 88 T400 78 V120 H0Z" fill="#DCEBE2"/>
+    <rect x="178" y="20" width="44" height="22" rx="4" fill="#065C33"/>
+    <path d="M200 42v12M136 66v-12h128v12" fill="none" stroke="#065C33" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="116" y="66" width="40" height="20" rx="2" fill="none" stroke="#0A7A45" stroke-width="2.4"/>
+    <rect x="180" y="66" width="40" height="20" rx="2" fill="none" stroke="#0A7A45" stroke-width="2.4"/>
+    <rect x="244" y="66" width="40" height="20" rx="2" fill="none" stroke="#0A7A45" stroke-width="2.4"/>
+    <path d="M124 76h24M188 76h24M252 76h24" fill="none" stroke="#0A7A45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="300" y="44" width="34" height="44" rx="3" fill="none" stroke="#065C33" stroke-width="2.4"/>
+    <path d="M308 56h18M308 66h18M308 76h11" fill="none" stroke="#065C33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

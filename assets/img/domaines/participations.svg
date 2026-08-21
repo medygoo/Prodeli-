@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" role="img" aria-hidden="true">
+  <defs><clipPath id="c1"><rect width="400" height="120" rx="10"/></clipPath></defs>
+  <g clip-path="url(#c1)">
+    <rect width="400" height="120" fill="#EAF4EE"/>
+    <path d="M0 96 Q100 74 200 88 T400 78 V120 H0Z" fill="#DCEBE2"/>
+    <rect x="120" y="74" width="28" height="26" rx="3" fill="#0A7A45"/>
+    <rect x="160" y="56" width="28" height="44" rx="3" fill="#0A7A45"/>
+    <rect x="200" y="36" width="28" height="64" rx="3" fill="#065C33"/>
+    <path d="M262 100V62" fill="none" stroke="#0A7A45" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M262 62c0-12 10-22 22-22 0 12-10 22-22 22z" fill="none" stroke="#0A7A45" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M262 72c0-11-9-20-20-20 0 11 9 20 20 20z" fill="none" stroke="#0A7A45" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="304" cy="92" r="8" fill="#C09018"/>
+    <circle cx="304" cy="80" r="8" fill="#C09018"/>
+    <circle cx="304" cy="68" r="8" fill="#C09018"/>
+    <circle cx="304" cy="92" r="8" fill="none" stroke="#065C33" stroke-width="1.8"/>
+    <circle cx="304" cy="80" r="8" fill="none" stroke="#065C33" stroke-width="1.8"/>
+    <circle cx="304" cy="68" r="8" fill="none" stroke="#065C33" stroke-width="1.8"/>
+    <path d="M92 100h224" fill="none" stroke="#065C33" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

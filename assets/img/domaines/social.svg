@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" role="img" aria-hidden="true">
+  <defs><clipPath id="c5"><rect width="400" height="120" rx="10"/></clipPath></defs>
+  <g clip-path="url(#c5)">
+    <rect width="400" height="120" fill="#EAF4EE"/>
+    <path d="M0 96 Q100 74 200 88 T400 78 V120 H0Z" fill="#DCEBE2"/>
+    <path d="M148 96V56l34-18 34 18v40" fill="none" stroke="#065C33" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M182 38V26h14" fill="none" stroke="#065C33" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="172" y="70" width="20" height="26" rx="2" fill="#0A7A45"/>
+    <path d="M136 96h94" fill="none" stroke="#065C33" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="268" cy="56" r="22" fill="none" stroke="#C6372D" stroke-width="3"/>
+    <path d="M268 46v20M258 56h20" fill="none" stroke="#C6372D" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="112" cy="62" r="8" fill="#065C33"/>
+    <path d="M100 96c0-10 5-18 12-18s12 8 12 18" fill="none" stroke="#065C33" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M100 100h204" fill="none" stroke="#065C33" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+  </g>
+</svg>

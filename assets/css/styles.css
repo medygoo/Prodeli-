@@ -63,7 +63,13 @@ h2{font-size:clamp(1.55rem,3.2vw,2.25rem);line-height:1.18;font-weight:750}
 h3{font-size:1.05rem;line-height:1.35;font-weight:700}
 .lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--gris);max-width:62ch;text-wrap:pretty}
 .section-encre .lead{color:#B9C7BF}
-.section-heading{max-width:66ch;margin-bottom:2.5rem}
+/* Le titre d'une section commence a la MEME verticale que ce qu'il
+   introduit. .shell centre son contenu : poser max-width sur le bloc
+   lui-meme le recentrait, et le titre partait 276 px a droite de ses
+   propres cartes (mesure a 1358 px, 153 px a 933). On limite donc la
+   longueur de LIGNE, pas la largeur du bloc. */
+.section-heading{margin-bottom:2.5rem}
+.section-heading > *{max-width:66ch}
 .section-heading p:not(.eyebrow){color:var(--gris);margin:.9rem 0 0}
 
 /* ── hero ── */
@@ -284,10 +290,6 @@ section[id],[id="main"]{scroll-margin-top:96px}
 }
 @media print{.wa-flottant{display:none}}
 
-/* ── icônes des domaines ── */
-.objet-ic{display:flex;align-items:center;justify-content:center;width:44px;height:44px;
-  border-radius:12px;background:var(--vert-pale);color:var(--vert-fonce);margin-bottom:.9rem}
-.objet-ic svg{width:24px;height:24px}
 .objet-card{padding-left:1.4rem}
 
 /* ── illustration du projet ── */
@@ -368,3 +370,14 @@ body.loupe-ouverte{overflow:hidden}
 .anim .loupe-cadre{animation:loupeArrivee .28s cubic-bezier(.22,.61,.36,1)}
 @keyframes loupeArrivee{from{opacity:0;transform:scale(.97)}}
 @media print{.loupe{display:none}}
+
+/* ── les six domaines : une illustration par carte ────────────────────
+   Un seul vocabulaire — meme cadre, meme trait, meme palette. Six
+   dessins qui se ressemblent forment un systeme ; six styles differents
+   donnent l'impression d'assemble. */
+.objet-visuel{width:100%;height:auto;aspect-ratio:400/120;border-radius:10px;
+  margin:0 0 1rem;display:block}
+#objet .objet-card{padding:1rem 1.1rem 1.2rem;border:1px solid var(--filet);
+  border-radius:var(--r);background:#fff}
+.contact-plan{margin:.35rem 0 0}
+.contact-plan a{font-size:.88rem;color:var(--vert-fonce);font-weight:600}
